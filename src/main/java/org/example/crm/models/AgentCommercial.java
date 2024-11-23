@@ -1,4 +1,13 @@
 package org.example.crm.models;
 
-public class AgentCommercial {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class AgentCommercial extends Employe{
 }
