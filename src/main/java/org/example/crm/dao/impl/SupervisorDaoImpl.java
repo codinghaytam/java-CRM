@@ -16,13 +16,14 @@ public class SupervisorDaoImpl implements SupervisorDao {
 
     @Override
     public boolean addAgent(AgentCommercial agent) {
-        String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password,supervisor_CNE) VALUES (?, ?, ?, ?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agent.getCNE());
             stmt.setString(2, agent.getNom());
             stmt.setString(3, agent.getPrenom());
             stmt.setString(4, agent.getPassword());
+            stmt.setString(5, agent.getSupervisor_id());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

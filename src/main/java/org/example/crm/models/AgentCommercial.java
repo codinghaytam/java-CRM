@@ -9,7 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AgentCommercial extends Employe{
-    public AgentCommercial(String cne, String nom, String prenom, String password) {
+    private String Supervisor_id;
+
+    public AgentCommercial(String cne, String nom, String prenom, String password,String Supervisor_id) {
         super(cne, nom, prenom, password);
+        this.Supervisor_id = Supervisor_id;
     }
 }

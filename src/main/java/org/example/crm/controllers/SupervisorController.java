@@ -8,6 +8,7 @@ import org.example.crm.dao.SupervisorDao;
 import org.example.crm.dao.impl.AgentCommercialDaoImpl;
 import org.example.crm.dao.impl.SupervisorDaoImpl;
 import org.example.crm.models.AgentCommercial;
+import org.example.crm.util.CurrentUser;
 
 public class SupervisorController {
     @FXML
@@ -37,6 +38,7 @@ public class SupervisorController {
         String nom = nomField.getText();
         String prenom = prenomField.getText();
         String password = passwordField.getText();
+        String Supervisor_id = CurrentUser.getLoggedInAdmin();
 
         if(cne.isEmpty() || nom.isEmpty() || prenom.isEmpty() || password.isEmpty()) {
             messageLabel.setText("One or many fields are empty!");
@@ -44,7 +46,7 @@ public class SupervisorController {
             return;
         }
 
-        AgentCommercial agent = new AgentCommercial(cne, nom, prenom, password);
+        AgentCommercial agent = new AgentCommercial(cne, nom, prenom, password, Supervisor_id);
 
         if (SupervisorDaoImpl.addAgent(agent)) {
             messageLabel.setText("Agent added successfully!");
