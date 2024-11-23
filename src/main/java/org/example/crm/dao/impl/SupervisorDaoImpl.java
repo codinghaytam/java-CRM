@@ -1,5 +1,6 @@
 package org.example.crm.dao.impl;
 
+import lombok.NoArgsConstructor;
 import org.example.crm.dao.SupervisorDao;
 import org.example.crm.models.AgentCommercial;
 import org.example.crm.models.Supervisor;
@@ -9,11 +10,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+
 public class SupervisorDaoImpl implements SupervisorDao {
 
     @Override
-    public void addAgent(AgentCommercial agent) {
-        String query = "INSERT INTO agent (CNE, nom, prenom, password) VALUES (?, ?, ?, ?)";
+    public boolean addAgent(AgentCommercial agent) {
+        String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password) VALUES (?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agent.getCNE());
@@ -23,7 +26,9 @@ public class SupervisorDaoImpl implements SupervisorDao {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     @Override
@@ -56,7 +61,7 @@ public class SupervisorDaoImpl implements SupervisorDao {
 
     @Override
     public void deleteAgent(String agentCNE) {
-        String query = "DELETE FROM agent WHERE CNE = ?";
+        String query = "DELETE FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agentCNE);

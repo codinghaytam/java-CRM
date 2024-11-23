@@ -6,7 +6,7 @@ import org.example.crm.models.Supervisor;
 import java.util.List;
 
 public interface SupervisorDao {
-    void addAgent(AgentCommercial agent);
+    boolean addAgent(AgentCommercial agent);
     void validateDemande(int demandeId);
     List<String> afficheDemandes();
     void deleteAgent(String agentCNE);
