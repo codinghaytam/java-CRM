@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="15.0" prefWidth="300.0" prefHeight="200.0" style="-fx-background-color: #87CEEB;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.crm.controllers.">
+<VBox alignment="CENTER" spacing="15.0" prefWidth="300.0" prefHeight="200.0" style="-fx-background-color: #87CEEB;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.crm.controllers.MainController">
     <padding>
         <Insets top="20" bottom="20" left="20" right="20" />
     </padding>
