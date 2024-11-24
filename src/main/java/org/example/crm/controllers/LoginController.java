@@ -41,7 +41,7 @@ public class LoginController {
             try {
 
                 // Load the AddAgent screen after successful login
-                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("view/Supervisor/AddAgent-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("view/Supervisor/SupervisorPage-view.fxml"));
                 Stage window = (Stage) messageLabel.getScene().getWindow(); // Use messageLabel instead of btn
 
                 // Set the new scene on the same stage (window)

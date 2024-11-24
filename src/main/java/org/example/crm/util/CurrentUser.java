@@ -1,13 +1,11 @@
 package org.example.crm.util;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class CurrentUser {
+    @Setter
+    @Getter
     private static String loggedInAdmin;
 
-    public static String getLoggedInAdmin() {
-        return loggedInAdmin;
-    }
-
-    public static void setLoggedInAdmin(String username) {
-        loggedInAdmin = username;
-    }
 }

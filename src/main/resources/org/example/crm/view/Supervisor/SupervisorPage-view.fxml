@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="277.0" prefWidth="335.0" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AdminHomeController">
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Admin Home Page" />
+    <Button fx:id="createAgentBtn" onAction="#createAgent" prefWidth="150" text="Create Agent" />
+    <Button fx:id="showAgentsBtn" onAction="#showAgents" prefWidth="150" text="Show Agents" />
+    <Button fx:id="deleteAgentBtn" onAction="#deleteAgent" prefWidth="150" text="Delete Agents" />
+</VBox>

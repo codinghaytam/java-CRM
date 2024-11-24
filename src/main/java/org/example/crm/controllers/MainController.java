@@ -29,7 +29,7 @@ public class MainController {
         navigateTo("view/Supervisor/AgentLogin-view.fxml", "Agent Login" , agentLoginButton);
     }
 
-    private void navigateTo(String fxmlFilePath, String title , Button btn) {
+    public static void navigateTo(String fxmlFilePath, String title , Button btn) {
         try {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(fxmlFilePath));
             Stage window = (Stage) btn.getScene().getWindow(); // Use messageLabel instead of btn
