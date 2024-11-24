@@ -16,8 +16,8 @@ public class DatabaseConnection {
     private DatabaseConnection() {}
 
     // Singleton method to get the connection
-    public static Connection getConnection() {
-        if (connection == null) {
+    public static Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
             try {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (SQLException e) {
@@ -28,15 +28,15 @@ public class DatabaseConnection {
         return connection;
     }
 
-    // Close the connection when the app ends (optional)
-    public static void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    // Close the connection when the app ends (optional)
+//    public static void closeConnection() {
+//        if (connection != null) {
+//            try {
+//                connection.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }
 

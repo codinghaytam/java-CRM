@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.crm.HelloApplication;
+import org.example.crm.dao.impl.SupervisorDaoImpl;
+import org.example.crm.models.Supervisor;
 import org.example.crm.util.CurrentUser;
 
 import java.io.IOException;
@@ -31,7 +33,10 @@ public class LoginController {
         String enteredUsername = usernameField.getText();
         String enteredPassword = passwordField.getText();
 
-        if (enteredUsername.equals("EE00000") && enteredPassword.equals("admin")) {
+        SupervisorDaoImpl supervisor = new SupervisorDaoImpl();
+
+
+        if (supervisor.getSupervisorByCNE(enteredUsername) != null) {
             CurrentUser.setLoggedInAdmin(enteredUsername);
             try {
 
