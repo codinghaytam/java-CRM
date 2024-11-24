@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 
 public class Supervisor extends Employe{
     public Supervisor(String cne, String nom, String prenom, String password) {

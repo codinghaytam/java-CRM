@@ -11,4 +11,5 @@ public interface SupervisorDao {
     List<String> afficheDemandes();
     void deleteAgent(String agentCNE);
     Supervisor getSupervisorByCNE(String CNE);
+    List<AgentCommercial> showAgents();
 }

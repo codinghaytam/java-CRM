@@ -9,7 +9,7 @@ public class AdminHomeController {
     private Button createAgentBtn;
 
     @FXML
-    private Button showAgentBtn;
+    private Button showAgentsBtn;
 
     @FXML
     private Button deleteAgentBtn;
@@ -21,7 +21,7 @@ public class AdminHomeController {
 
     @FXML
     private void showAgents() {
-        MainController.navigateTo("ShowAgents-view.fxml", "Show Agents",showAgentBtn);
+        MainController.navigateTo("view/Supervisor/showAgents-view.fxml", "Show Agents",showAgentsBtn);
     }
 
     @FXML

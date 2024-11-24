@@ -61,6 +61,34 @@ public class SupervisorDaoImpl implements SupervisorDao {
     }
 
     @Override
+    public List<AgentCommercial> showAgents() {
+        List<AgentCommercial> agents = new ArrayList<>();
+        String query = "SELECT * FROM agent_commercial";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                // Debug: Print the fetched data
+                System.out.println("Fetched agent: " + rs.getString("CNE"));
+                agents.add(new AgentCommercial(
+                        rs.getString("CNE"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("password"),
+                        rs.getString("supervisor_CNE")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return agents;
+    }
+
+
+
+    @Override
     public void deleteAgent(String agentCNE) {
         String query = "DELETE FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
