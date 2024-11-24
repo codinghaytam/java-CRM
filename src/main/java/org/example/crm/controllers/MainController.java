@@ -26,7 +26,7 @@ public class MainController {
 
     @FXML
     private void handleAgentLogin(ActionEvent event) {
-        navigateTo("view/AgentLogin-view.fxml", "Agent Login" , agentLoginButton);
+        navigateTo("view/Supervisor/AgentLogin-view.fxml", "Agent Login" , agentLoginButton);
     }
 
     private void navigateTo(String fxmlFilePath, String title , Button btn) {
