@@ -1,4 +1,14 @@
 package org.example.crm.models;
 
-public class Supervisor {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@NoArgsConstructor
+public class Supervisor extends Employe{
+    public Supervisor(String cne, String nom, String prenom, String password) {
+        super(cne, nom, prenom, password);
+    }
 }
