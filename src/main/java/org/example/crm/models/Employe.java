@@ -11,8 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Employe {
-    private String CNE;
-    private String nom;
-    private String prenom;
-    private String password;
+    protected String CNE;
+    protected String nom;
+    protected String prenom;
+    protected String password;
 }

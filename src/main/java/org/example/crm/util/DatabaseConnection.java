@@ -18,12 +18,7 @@ public class DatabaseConnection {
     // Singleton method to get the connection
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
-            try {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Error connecting to the database", e);
-            }
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         return connection;
     }

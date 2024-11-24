@@ -1,5 +1,6 @@
 package org.example.crm.models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +10,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class Client {
-    String entreprise;
+public class Lead {
     String entrepriseId;
+    String entrepriseName;
     String headquarters;
     String phone;
     String email;
-    LoyaltyCard loyaltyCard;
 }

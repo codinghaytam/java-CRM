@@ -1,4 +1,7 @@
 package org.example.crm.dao.impl;
 
-public class LeadDaoImpl {
+import org.example.crm.dao.LeadDao;
+
+public class LeadDaoImpl implements LeadDao {
+
 }
