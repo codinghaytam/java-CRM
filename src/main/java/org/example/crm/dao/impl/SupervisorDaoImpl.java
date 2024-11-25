@@ -9,14 +9,17 @@ import org.example.crm.util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @NoArgsConstructor
-
 public class SupervisorDaoImpl implements SupervisorDao {
+
+    private static final Logger LOGGER = Logger.getLogger(SupervisorDaoImpl.class.getName());
 
     @Override
     public boolean addAgent(AgentCommercial agent) {
-        String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password,supervisor_CNE) VALUES (?, ?, ?, ?,?)";
+        final String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password, supervisor_CNE) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agent.getCNE());
@@ -25,52 +28,51 @@ public class SupervisorDaoImpl implements SupervisorDao {
             stmt.setString(4, agent.getPassword());
             stmt.setString(5, agent.getSupervisor_id());
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            LOGGER.log(Level.SEVERE, "Error adding agent: {0}", agent.getCNE());
+            LOGGER.log(Level.SEVERE, "Database error", e);
         }
-        return true;
+        return false;
     }
 
     @Override
     public void validateDemande(int demandeId) {
-        String query = "UPDATE demande SET status = 'VALIDATED' WHERE id = ?";
+        final String query = "UPDATE demande SET status = 'VALIDATED' WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, demandeId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error validating demande ID: {0}", demandeId);
+            LOGGER.log(Level.SEVERE, "Database error", e);
         }
     }
 
     @Override
     public List<String> afficheDemandes() {
-        List<String> demandes = new ArrayList<>();
-        String query = "SELECT * FROM demande";
+        final List<String> demandes = new ArrayList<>();
+        final String query = "SELECT id, status FROM demande";
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                demandes.add("Demande ID: " + rs.getInt("id") + ", Status: " + rs.getString("status"));
+                demandes.add(String.format("Demande ID: %d, Status: %s", rs.getInt("id"), rs.getString("status")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error fetching demandes", e);
         }
         return demandes;
     }
 
     @Override
     public List<AgentCommercial> showAgents() {
-        List<AgentCommercial> agents = new ArrayList<>();
-        String query = "SELECT * FROM agent_commercial";
+        final List<AgentCommercial> agents = new ArrayList<>();
+        final String query = "SELECT CNE, nom, prenom, password, supervisor_CNE FROM agent_commercial";
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                // Debug: Print the fetched data
-                System.out.println("Fetched agent: " + rs.getString("CNE"));
                 agents.add(new AgentCommercial(
                         rs.getString("CNE"),
                         rs.getString("nom"),
@@ -80,49 +82,45 @@ public class SupervisorDaoImpl implements SupervisorDao {
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Error fetching agents", e);
+            throw new RuntimeException(e); // Optional: Re-throw as a runtime exception
         }
-
         return agents;
     }
 
-
-
     @Override
     public void deleteAgent(String agentCNE) {
-        String query = "DELETE FROM agent_commercial WHERE CNE = ?";
+        final String query = "DELETE FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agentCNE);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error deleting agent CNE: {0}", agentCNE);
+            LOGGER.log(Level.SEVERE, "Database error", e);
         }
     }
 
     @Override
-    public boolean verifyLogin(String login , String password){
-        String query = "SELECT * FROM supervisor WHERE CNE = ? AND password = ?";
-        try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(query)){
-            stmt.setString(1,login);
-            stmt.setString(2,password);
-            try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
-                    return true;
-                }
+    public boolean verifyLogin(String login, String password) {
+        final String query = "SELECT 1 FROM supervisor WHERE CNE = ? AND password = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, login);
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
-
-        }
-        catch(SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error verifying login for CNE: {0}", login);
+            LOGGER.log(Level.SEVERE, "Database error", e);
         }
         return false;
     }
 
     @Override
     public Supervisor getSupervisorByCNE(String CNE) {
-        String query = "SELECT * FROM supervisor WHERE CNE = ?";
+        final String query = "SELECT CNE, nom, prenom, password FROM supervisor WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, CNE);
@@ -137,9 +135,9 @@ public class SupervisorDaoImpl implements SupervisorDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error fetching supervisor with CNE: {0}", CNE);
+            LOGGER.log(Level.SEVERE, "Database error", e);
         }
         return null;
     }
 }
-
