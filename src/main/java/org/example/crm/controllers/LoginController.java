@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.crm.HelloApplication;
 import org.example.crm.dao.impl.SupervisorDaoImpl;
-import org.example.crm.models.Supervisor;
 import org.example.crm.util.CurrentUser;
 
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class LoginController {
         SupervisorDaoImpl supervisor = new SupervisorDaoImpl();
 
 
-        if (supervisor.getSupervisorByCNE(enteredUsername) != null) {
+        if (supervisor.verifyLogin(enteredUsername,enteredPassword)) {
             CurrentUser.setLoggedInAdmin(enteredUsername);
             try {
 

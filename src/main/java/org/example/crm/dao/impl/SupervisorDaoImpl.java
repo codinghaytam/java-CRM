@@ -101,6 +101,26 @@ public class SupervisorDaoImpl implements SupervisorDao {
     }
 
     @Override
+    public boolean verifyLogin(String login , String password){
+        String query = "SELECT * FROM supervisor WHERE CNE = ? AND password = ?";
+        try(Connection conn = DatabaseConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setString(1,login);
+            stmt.setString(2,password);
+            try(ResultSet rs = stmt.executeQuery()){
+                if(rs.next()){
+                    return true;
+                }
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public Supervisor getSupervisorByCNE(String CNE) {
         String query = "SELECT * FROM supervisor WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();

@@ -12,4 +12,5 @@ public interface SupervisorDao {
     void deleteAgent(String agentCNE);
     Supervisor getSupervisorByCNE(String CNE);
     List<AgentCommercial> showAgents();
+    boolean verifyLogin(String login, String password);
 }
