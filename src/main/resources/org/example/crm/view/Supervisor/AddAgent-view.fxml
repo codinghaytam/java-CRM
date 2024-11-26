@@ -3,18 +3,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.SupervisorController">
+<AnchorPane prefHeight="428.0" prefWidth="685.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AddAgentController">
     <children>
-        <TextField fx:id="cneField" layoutX="75.0" layoutY="82.0" prefHeight="25.0" prefWidth="419.0" />
-        <Label layoutX="76.0" layoutY="59.0" text="CNE" />
-        <TextField fx:id="nomField" layoutX="75.0" layoutY="164.0" prefHeight="25.0" prefWidth="419.0" />
-        <Label layoutX="73.0" layoutY="140.0" prefHeight="17.0" prefWidth="36.0" text="Nom" />
-        <TextField fx:id="prenomField" layoutX="76.0" layoutY="237.0" prefHeight="25.0" prefWidth="419.0" />
-        <Label layoutX="78.0" layoutY="213.0" text="Prenom" />
-        <TextField fx:id="passwordField" layoutX="76.0" layoutY="306.0" prefHeight="25.0" prefWidth="419.0" />
-        <Label layoutX="74.0" layoutY="289.0" text="Password" />
-        <Button fx:id="addButton" layoutX="274.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleAddAgent" text="Add Agent" />
-        <Label fx:id="messageLabel" layoutX="305.0" layoutY="378.0" text="" />
+        <!-- CNE Field -->
+        <Label layoutX="76.0" layoutY="59.0" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="CNE" />
+        <TextField fx:id="cneField" layoutX="75.0" layoutY="82.0" prefHeight="35.0" prefWidth="419.0" style="-fx-background-color: #ecf0f1; -fx-border-radius: 5; -fx-font-size: 14px; -fx-text-fill: #34495e;" />
 
+        <!-- Name Field -->
+        <Label layoutX="73.0" layoutY="140.0" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Nom" />
+        <TextField fx:id="nomField" layoutX="75.0" layoutY="164.0" prefHeight="35.0" prefWidth="419.0" style="-fx-background-color: #ecf0f1; -fx-border-radius: 5; -fx-font-size: 14px; -fx-text-fill: #34495e;" />
+
+        <!-- Surname Field -->
+        <Label layoutX="78.0" layoutY="213.0" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Prenom" />
+        <TextField fx:id="prenomField" layoutX="76.0" layoutY="237.0" prefHeight="35.0" prefWidth="419.0" style="-fx-background-color: #ecf0f1; -fx-border-radius: 5; -fx-font-size: 14px; -fx-text-fill: #34495e;" />
+
+        <!-- Password Field -->
+        <Label layoutX="74.0" layoutY="289.0" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Password" />
+        <TextField fx:id="passwordField" layoutX="76.0" layoutY="306.0" prefHeight="35.0" prefWidth="419.0" style="-fx-background-color: #ecf0f1; -fx-border-radius: 5; -fx-font-size: 14px; -fx-text-fill: #34495e;" />
+
+        <!-- Add Agent Button -->
+        <Button fx:id="addButton" layoutX="274.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleAddAgent" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10px 20px; -fx-border-radius: 5;" text="Add Agent" />
+
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" layoutX="324.0" layoutY="395.0" style="-fx-font-size: 14px; -fx-text-fill: #e74c3c;" text="" />
     </children>
 </AnchorPane>
