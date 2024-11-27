@@ -3,7 +3,7 @@ package org.example.crm.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AdminHomeController {
+public class ManageAgentsController {
 
     @FXML
     private Button createAgentBtn;
