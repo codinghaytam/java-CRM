@@ -5,6 +5,7 @@ import org.example.crm.dao.SupervisorDao;
 import org.example.crm.models.AgentCommercial;
 import org.example.crm.models.Supervisor;
 import org.example.crm.util.DatabaseConnection;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,15 +21,22 @@ public class SupervisorDaoImpl implements SupervisorDao {
     @Override
     public boolean addAgent(AgentCommercial agent) {
         final String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password, supervisor_CNE) VALUES (?, ?, ?, ?, ?)";
+
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
+
             stmt.setString(1, agent.getCNE());
             stmt.setString(2, agent.getNom());
             stmt.setString(3, agent.getPrenom());
-            stmt.setString(4, agent.getPassword());
+
+            // Hash the password before saving it
+            String hashedPassword = BCrypt.hashpw(agent.getPassword(), BCrypt.gensalt());
+            stmt.setString(4, hashedPassword);
+
             stmt.setString(5, agent.getSupervisor_id());
             stmt.executeUpdate();
             return true;
+
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error adding agent: {0}", agent.getCNE());
             LOGGER.log(Level.SEVERE, "Database error", e);
@@ -89,16 +97,18 @@ public class SupervisorDaoImpl implements SupervisorDao {
     }
 
     @Override
-    public void deleteAgent(String agentCNE) {
+    public boolean deleteAgent(String agentCNE) {
         final String query = "DELETE FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, agentCNE);
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error deleting agent CNE: {0}", agentCNE);
             LOGGER.log(Level.SEVERE, "Database error", e);
         }
+        return false;
     }
 
     @Override
