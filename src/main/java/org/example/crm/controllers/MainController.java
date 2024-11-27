@@ -34,7 +34,7 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(fxmlFilePath));
             Stage window = (Stage) btn.getScene().getWindow(); // Use messageLabel instead of btn
             window.setTitle(title);
-            window.setScene(new Scene(loader.load(), 600, 400));
+            window.setScene(new Scene(loader.load()));
         } catch (IOException e) {
             e.printStackTrace();
         }
