@@ -4,13 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.example.crm.dao.SupervisorDao;
-import org.example.crm.dao.impl.AgentCommercialDaoImpl;
 import org.example.crm.dao.impl.SupervisorDaoImpl;
 import org.example.crm.models.AgentCommercial;
 import org.example.crm.util.CurrentUser;
 
-public class SupervisorController {
+public class AddAgentController {
     @FXML
     private TextField cneField;
 
