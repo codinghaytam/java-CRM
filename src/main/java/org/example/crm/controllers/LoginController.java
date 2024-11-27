@@ -37,19 +37,7 @@ public class LoginController {
 
         if (supervisor.verifyLogin(enteredUsername,enteredPassword)) {
             CurrentUser.setLoggedInAdmin(enteredUsername);
-            try {
-
-                // Load the AddAgent screen after successful login
-                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("view/Supervisor/SupervisorPage-view.fxml"));
-                Stage window = (Stage) messageLabel.getScene().getWindow(); // Use messageLabel instead of btn
-
-                // Set the new scene on the same stage (window)
-                window.setScene(new Scene(loader.load(), 600, 400));
-
-            } catch (IOException e) {
-                e.printStackTrace();  // Print the error details for debugging
-                messageLabel.setText("Error loading the Add Agent screen.");
-            }
+            MainController.navigateTo("view/Supervisor/adminLandingPage-view.fxml" , "Dashboard" , btn);
         } else {
             messageLabel.setText("Invalid Username or Password");
         }
