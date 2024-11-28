@@ -8,6 +8,8 @@ public interface SupervisorDao {
     boolean addAgent(AgentCommercial agent);
     void validateDemande(int demandeId);
     List<String> afficheDemandes();
-    void deleteAgent(String agentCNE);
+    boolean deleteAgent(String agentCNE);
     Supervisor getSupervisorByCNE(String CNE);
+    List<AgentCommercial> showAgents();
+    boolean verifyLogin(String login, String password);
 }

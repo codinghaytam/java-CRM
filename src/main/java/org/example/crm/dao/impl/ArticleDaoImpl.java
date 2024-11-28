@@ -1,4 +1,5 @@
 package org.example.crm.dao.impl;
 
-public class ArticleDaoImpl {
+import org.example.crm.dao.ArticleDao;
+public class ArticleDaoImpl implements ArticleDao {
 }

@@ -18,14 +18,14 @@ public class MainController {
     }
     @FXML
     private void handleAgentLogin(ActionEvent event) {
-        navigateTo("view/AgentLogin-view.fxml", "Agent Login" , agentLoginButton);
+        navigateTo("view/Agent/AgentLogin-view.fxml", "Agent Login" , agentLoginButton);
     }
-    private void navigateTo(String fxmlFilePath, String title , Button btn) {
+    public static void navigateTo(String fxmlFilePath, String title , Button btn) {
         try {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(fxmlFilePath));
             Stage window = (Stage) btn.getScene().getWindow(); // Use messageLabel instead of btn
             window.setTitle(title);
-            window.setScene(new Scene(loader.load(), 600, 400));
+            window.setScene(new Scene(loader.load()));
         } catch (IOException e) {
             e.printStackTrace();
         }

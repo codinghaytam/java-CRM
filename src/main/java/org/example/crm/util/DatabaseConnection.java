@@ -10,7 +10,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/crm_db";  // Update with your database URL
     private static final String USER = "root";  // Update with your DB username
-    private static final String PASSWORD = "";  // Update with your DB password
+    private static final String PASSWORD = "0000";  // Update with your DB password
 
     // Private constructor to prevent instantiation
     private DatabaseConnection() {}
