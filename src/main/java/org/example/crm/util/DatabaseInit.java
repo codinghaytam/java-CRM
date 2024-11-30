@@ -160,6 +160,23 @@ public class DatabaseInit {
             e.printStackTrace();
         }
 
+        pr = conn.prepareStatement("ALTER TABLE client ADD employeeID varchar(10);");
+        try{
+            is_init&=pr.execute();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        pr = conn.prepareStatement("ALTER TABLE client " +
+                "ADD CONSTRAINT fk_employeid " +
+                "FOREIGN KEY (employeeid) REFERENCES Agentcommercial(CNE);");
+        try{
+            is_init&=pr.execute();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
         return is_init;
     }

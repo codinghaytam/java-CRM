@@ -60,4 +60,23 @@ public class AgentCommercialDaoImpl  implements AgentCommercialDao {
         }
         return leads;
     }
+
+    public boolean verifylogin(String cne, String password){
+        try{
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Agentcommercial WHERE CNE=? AND PASSWORD=?;");
+                stmt.setString(1,cne);
+                stmt.setString(2,password);
+                try(ResultSet rs = stmt.executeQuery()){
+                    return rs.next();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

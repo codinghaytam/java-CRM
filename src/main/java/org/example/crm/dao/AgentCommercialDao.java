@@ -6,4 +6,5 @@ public interface AgentCommercialDao {
     public boolean demandeLoyeltyCard(Lead lead, String description);
     public boolean ajoutLead(Lead lead);
     public List<Lead> afficheLead();
+
 }
