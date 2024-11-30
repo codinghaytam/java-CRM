@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" prefHeight="277.0" prefWidth="335.0" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AgentPageController">
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Agent Home Page" />
+    <Button fx:id="createLeadBtn" onAction="#createLead" prefWidth="150" text="Create Lead" />
+    <Button fx:id="showLeadsBtn" onAction="#showLeads" prefWidth="150" text="Show/Delete Leads" />
+</VBox>

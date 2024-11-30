@@ -13,36 +13,30 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lombok.NoArgsConstructor;
-import org.example.crm.dao.SupervisorDao;
-import org.example.crm.models.AgentCommercial;
-import org.example.crm.models.Supervisor;
-import org.example.crm.util.DatabaseConnection;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 @NoArgsConstructor
-
 public class SupervisorDaoImpl implements SupervisorDao {
+
     private static final Logger LOGGER = Logger.getLogger(SupervisorDaoImpl.class.getName());
+
     @Override
     public boolean addAgent(AgentCommercial agent) {
         final String query = "INSERT INTO agent_commercial (CNE, nom, prenom, password, supervisor_CNE) VALUES (?, ?, ?, ?, ?)";
+
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
+
             stmt.setString(1, agent.getCNE());
             stmt.setString(2, agent.getNom());
             stmt.setString(3, agent.getPrenom());
+
             // Hash the password before saving it
             String hashedPassword = BCrypt.hashpw(agent.getPassword(), BCrypt.gensalt());
             stmt.setString(4, hashedPassword);
+
             stmt.setString(5, agent.getSupervisor_id());
             stmt.executeUpdate();
             return true;
+
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error adding agent: {0}", agent.getCNE());
             LOGGER.log(Level.SEVERE, "Database error", e);
@@ -68,8 +62,8 @@ public class SupervisorDaoImpl implements SupervisorDao {
         final List<String> demandes = new ArrayList<>();
         final String query = "SELECT id, status FROM demande";
         try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 demandes.add(String.format("Demande ID: %d, Status: %s", rs.getInt("id"), rs.getString("status")));
             }
@@ -78,6 +72,7 @@ public class SupervisorDaoImpl implements SupervisorDao {
         }
         return demandes;
     }
+
     @Override
     public List<AgentCommercial> showAgents() {
         final List<AgentCommercial> agents = new ArrayList<>();
@@ -100,7 +95,8 @@ public class SupervisorDaoImpl implements SupervisorDao {
         }
         return agents;
     }
-    @Override	
+
+    @Override
     public boolean deleteAgent(String agentCNE) {
         final String query = "DELETE FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -114,6 +110,7 @@ public class SupervisorDaoImpl implements SupervisorDao {
         }
         return false;
     }
+
     @Override
     public boolean verifyLogin(String login, String password) {
         final String query = "SELECT 1 FROM supervisor WHERE CNE = ? AND password = ?";
@@ -130,6 +127,7 @@ public class SupervisorDaoImpl implements SupervisorDao {
         }
         return false;
     }
+
     @Override
     public Supervisor getSupervisorByCNE(String CNE) {
         final String query = "SELECT CNE, nom, prenom, password FROM supervisor WHERE CNE = ?";

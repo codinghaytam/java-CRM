@@ -2,6 +2,7 @@ package org.example.crm.dao;
 
 import org.example.crm.models.AgentCommercial;
 import org.example.crm.models.Supervisor;
+
 import java.util.List;
 
 public interface SupervisorDao {
