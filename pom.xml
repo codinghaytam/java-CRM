@@ -73,6 +73,11 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+        <dependency>
+        	<groupId>ma.ensa</groupId>
+        	<artifactId>bank</artifactId>
+        	<version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

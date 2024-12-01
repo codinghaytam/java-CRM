@@ -1,5 +1,7 @@
 package org.example.crm.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,7 @@ import lombok.Setter;
 
 public class AgentCommercial extends Employe{
     private String Supervisor_id;
-
+    List<Lead> leads;
     public AgentCommercial(String cne, String nom, String prenom, String password,String Supervisor_id) {
         super(cne, nom, prenom, password);
         this.Supervisor_id = Supervisor_id;

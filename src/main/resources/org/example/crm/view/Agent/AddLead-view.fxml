@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AddLeadController">
+    <Label text="Add Lead" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    <TextField fx:id="companyNameField" promptText="Company Name" />
+    <TextField fx:id="headquartersField" promptText="Headquarters" />
+    <TextField fx:id="phoneField" promptText="Phone" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <Button text="Submit" onAction="#handleAddLead" />
+</VBox>
