@@ -11,10 +11,10 @@ import java.util.TreeMap;
 @Getter
 @ToString
 public class LoyaltyCard {
-    String cardId;
+    String carteDeFideliteId;
     Map<String,Double> categoryDiscount;
     public LoyaltyCard(String cardId) {
-        this.cardId = cardId;
+        this.carteDeFideliteId = cardId;
         this.categoryDiscount = new TreeMap<>();
     }
 }

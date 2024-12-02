@@ -33,11 +33,11 @@ CREATE TABLE clients (
 
 -- Table CarteDeFidelite
 CREATE TABLE carteDeFidelite (
-                                 carteDeFideliteId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
-                                 clientId CHAR(36) NOT NULL,
-                                 statut ENUM('active','suspendue') DEFAULT 'suspendue',
-                                 dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
-                                 FOREIGN KEY (clientId) REFERENCES clients(clientId) ON DELETE CASCADE
+                        carteDeFideliteId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
+                        clientId CHAR(36) NOT NULL,
+                        statut ENUM('active','suspendue') DEFAULT 'suspendue',
+                        dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
+                        FOREIGN KEY (clientId) REFERENCES clients(clientId) ON DELETE CASCADE
 );
 
 -- Table Leads
@@ -54,21 +54,21 @@ CREATE TABLE leads (
 
 -- Table Demandes
 CREATE TABLE demandes (
-                          demandeId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
-                          leadId CHAR(36),
-                          employeeId VARCHAR(36),
-                          carteDeFideliteId CHAR(36),
-                          statut ENUM('enAttente','approuvee','rejettee') DEFAULT 'enAttente',
-                          dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
-                          FOREIGN KEY (leadId) REFERENCES leads(leadId) ON DELETE SET NULL,
-                          FOREIGN KEY (employeeId) REFERENCES employees(CIN) ON DELETE SET NULL,
-                          FOREIGN KEY (carteDeFideliteId) REFERENCES carteDeFidelite(carteDeFideliteId) ON DELETE SET NULL
+                      demandeId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
+                      leadId CHAR(36),
+                      employeeId VARCHAR(36),
+                      carteDeFideliteId CHAR(36),
+                      statut ENUM('enAttente','approuvee','rejettee') DEFAULT 'enAttente',
+                      dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
+                      FOREIGN KEY (leadId) REFERENCES leads(leadId) ON DELETE SET NULL,
+                      FOREIGN KEY (employeeId) REFERENCES employees(CIN) ON DELETE SET NULL,
+                      FOREIGN KEY (carteDeFideliteId) REFERENCES carteDeFidelite(carteDeFideliteId) ON DELETE SET NULL
 );
 
 -- Table catégories de produits
 CREATE TABLE categories (
-                            categorieId CHAR(8) PRIMARY KEY,-- United Nations Standard Products and Services Code
-                            nomCategorie VARCHAR(100) NOT NULL
+                        categorieId CHAR(8) PRIMARY KEY,-- United Nations Standard Products and Services Code
+                        nomCategorie VARCHAR(100) NOT NULL
 );
 
 -- Table remises
@@ -84,9 +84,10 @@ CREATE TABLE remises (
 -- Table produits
 CREATE TABLE produits (
                           produitId VARCHAR(50) PRIMARY KEY, -- Identifiant manuel basé sur le marché
-                          produitsCategorie CHAR(8) NOT NULL, -- Référence vers la table categories
+                          produitTitle VARCHAR(50) NOT NULL, -- Le nom du produit
+                          categorieId CHAR(8) NOT NULL, -- Référence vers la table categories
                           prix FLOAT NOT NULL,
-                          FOREIGN KEY (produitsCategorie) REFERENCES categories(categorieId) ON DELETE CASCADE
+                          FOREIGN KEY (categorieId) REFERENCES categories(categorieId) ON DELETE CASCADE
 );
 
 -- Table Commande
@@ -94,6 +95,7 @@ CREATE TABLE commande (
                           commandeId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
                           employeeId VARCHAR(36),
                           carteDeFideliteId CHAR(36),
+                          prixTotal FLOAT NOT NULL,
                           dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
                           FOREIGN KEY (employeeId) REFERENCES employees(CIN) ON DELETE SET NULL,
                           FOREIGN KEY (carteDeFideliteId) REFERENCES carteDeFidelite(carteDeFideliteId) ON DELETE SET NULL

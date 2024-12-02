@@ -9,8 +9,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class Article {
-    String articleId;
-    String articleTitle;
-    String articleCategory;
+class Produit {
+    String produitId;
+    String produitTitle;
+    String categorieId;
+    float prix;
 }
