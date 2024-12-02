@@ -13,4 +13,12 @@ public class Lead {
     protected String headquarters;
     protected String phone;
     protected String email;
+    public Lead(Lead lead) {
+    	this.entrepriseId = lead.entrepriseId;
+    	this.entrepriseName = lead.entrepriseName;
+    	this.headquarters = lead.headquarters;
+    	this.phone = lead.phone;
+    	this.email = lead.email;
+    	
+    }
 }
