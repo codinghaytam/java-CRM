@@ -1,4 +1,4 @@
 package org.example.crm.dao;
 
-public interface ArticleDao {
+public interface ProduitDao {
 }

@@ -8,10 +8,10 @@ import java.util.TreeMap;
 @Getter
 @ToString
 public class LoyaltyCard {
-    String cardId;
+    String carteDeFideliteId;
     Map<String,Double> categoryDiscount;
-    public LoyaltyCard(String cardId) {
-        this.cardId = cardId;
+    public LoyaltyCard(String carteDeFideliteId) {
+        this.carteDeFideliteId = carteDeFideliteId;
         this.categoryDiscount = new TreeMap<>();
     }
 }

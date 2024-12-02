@@ -16,4 +16,8 @@ public class Client extends Lead {
     public Client(String entrepriseId, String entrepriseName, String headquarters, String phone, String email) {
         super(entrepriseId, entrepriseName, headquarters, phone, email);
     }
+    public Client(Lead lead, LoyaltyCard loyaltycard) {
+    	super(lead);
+    	this.loyaltyCard = loyaltycard;
+    }
 }
