@@ -113,13 +113,14 @@ public class DatabaseInit {
                 is_init = false;
             }
         // agent_commercial table
-        pr = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Agentcommercial (" +
-                "CNE VARCHAR(10) PRIMARY KEY, " +
-                "nom VARCHAR(50) NOT NULL, " +
-                "prenom VARCHAR(50) NOT NULL, " +
-                "password VARCHAR(255) NOT NULL, " +
-                "supervisor_CNE VARCHAR(10), " +
-                "FOREIGN KEY (supervisor_CNE) REFERENCES Supervisor(CNE));");
+        pr = conn.prepareStatement("CREATE TABLE agent_commercial (" +
+                "    CNE VARCHAR(10) PRIMARY KEY,        " +
+                "    nom VARCHAR(50) NOT NULL,           " +
+                "    prenom VARCHAR(50) NOT NULL,        " +
+                "    password VARCHAR(255) NOT NULL,  " +
+                "    supervisor_CNE VARCHAR(10),         " +
+                "    FOREIGN KEY (supervisor_CNE) REFERENCES Supervisor(CNE)  " +
+                ");");
         try {
             is_init &= pr.execute();
         } catch (SQLException e) {

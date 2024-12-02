@@ -17,7 +17,7 @@ public class ClientDaoImpl implements ClientDao {
             conn = DatabaseConnection.getConnection();
             PreparedStatement pr = conn.prepareStatement("insert into client values(?,?,?,?,?,?,?)");
             pr.setString(1,client.getEntrepriseId());
-            pr.setString(2,client.getEntreprise());
+            pr.setString(2,client.getEntrepriseName());
             pr.setString(3,client.getEmail());
             pr.setString(4,client.getPhone());
             pr.setString(5,client.getHeadquarters());
@@ -43,19 +43,18 @@ public class ClientDaoImpl implements ClientDao {
     public List<Client> selectAll() {
         List<Client> result = new ArrayList<>();
         try{
-            String sql = "select * from client";
+            String sql = "select * from clients";
             Connection conn = DatabaseConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while(rs.next()){
                 result.add(new Client(
-                        rs.getString("nom"),
-                        rs.getString("id"),
-                        rs.getString("adresse"),
-                        rs.getString("telephone"),
-                        rs.getString("email"),
-                        null
+                        rs.getString("entrepriseId"),
+                        rs.getString("entrepriseName"),
+                        rs.getString("headquarters"),
+                        rs.getString("phone"),
+                        rs.getString("email")
                 ));
             }
         }catch(SQLException e){

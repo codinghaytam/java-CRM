@@ -23,7 +23,7 @@ public class AgentCommercialLoginController {
     @FXML
     private void login() {
         AgentCommercialDaoImpl agentCommercialDao = new AgentCommercialDaoImpl();
-        if (agentCommercialDao.verifylogin(cne.getText(), password.getText())){
+        if (agentCommercialDao.verifyLogin(cne.getText(), password.getText())){
             navigateTo("view/Agent/AgentCommertional.fxml", "Page Agent",btn);
 
         }else {

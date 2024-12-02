@@ -32,7 +32,7 @@ public class AgentLoginController {
         // Vérifier les identifiants
         if (agentDao.verifyLogin(enteredUsername, enteredPassword)) {
             CurrentUser.setLoggedInCommercial(enteredUsername);  // Set le commercial connecté
-            MainController.navigateTo("view/Agent/agentPage-view.fxml", "Agent Dashboard", btn);
+            MainController.navigateTo("view/Agent/AgentPage-view.fxml", "Agent Dashboard", btn);
         } else {
             messageLabel.setText("Invalid Username or Password");
         }
