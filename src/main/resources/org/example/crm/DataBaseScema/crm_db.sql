@@ -2,6 +2,15 @@
 CREATE DATABASE IF NOT EXISTS crm_db;
 USE crm_db;
 
+CREATE TABLE Supervisor (
+    CNE VARCHAR(10) PRIMARY KEY,       
+    nom VARCHAR(50) NOT NULL,           
+    prenom VARCHAR(50) NOT NULL,        
+    password VARCHAR(255) NOT NULL      
+);
+INSERT INTO Supervisor (CNE, nom, prenom, password) 
+VALUES ('EB0000', 'Dupont', 'Jean', 'admin');
+
 CREATE TABLE agent_commercial (
     CNE VARCHAR(10) PRIMARY KEY,        
     nom VARCHAR(50) NOT NULL,           
@@ -11,12 +20,6 @@ CREATE TABLE agent_commercial (
     FOREIGN KEY (supervisor_CNE) REFERENCES Supervisor(CNE)  
 );
 
-CREATE TABLE Supervisor (
-    CNE VARCHAR(10) PRIMARY KEY,       
-    nom VARCHAR(50) NOT NULL,           
-    prenom VARCHAR(50) NOT NULL,        
-    password VARCHAR(255) NOT NULL      
-);
 CREATE TABLE leads (
                        entrepriseId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
                        entrepriseName VARCHAR(100) NOT NULL,
@@ -26,13 +29,7 @@ CREATE TABLE leads (
                        agent_CNE VARCHAR(10),
                        FOREIGN KEY (agent_CNE) REFERENCES agent_commercial(CNE) ON DELETE SET NULL
 );
-CREATE TABLE carteDeFidelite (
-                                 carteDeFideliteId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
-                                 entrepriseId CHAR(36) NOT NULL,
-                                 statut ENUM('active','suspendue') DEFAULT 'suspendue',
-                                 dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
-                                 FOREIGN KEY (entrepriseId) REFERENCES clients(entrepriseId) ON DELETE CASCADE
-);
+
 CREATE TABLE clients (
                        entrepriseId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
                        entrepriseName VARCHAR(100) NOT NULL,
@@ -41,6 +38,14 @@ CREATE TABLE clients (
                        email VARCHAR(150),
                        agent_CNE VARCHAR(10),
                        FOREIGN KEY (agent_CNE) REFERENCES agent_commercial(CNE) ON DELETE SET NULL
+);
+
+CREATE TABLE carteDeFidelite (
+                                 carteDeFideliteId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
+                                 entrepriseId CHAR(36) NOT NULL,
+                                 statut ENUM('active','suspendue') DEFAULT 'suspendue',
+                                 dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
+                                 FOREIGN KEY (entrepriseId) REFERENCES clients(entrepriseId) ON DELETE CASCADE
 );
 
 CREATE TABLE categories (
@@ -95,3 +100,30 @@ CREATE TABLE produitcommande (
                                  FOREIGN KEY (commandeId) REFERENCES commande(commandeId) ON DELETE CASCADE,
                                  FOREIGN KEY (produitId) REFERENCES produits(produitId) ON DELETE CASCADE
 );
+
+-- Catégories pour hôtels, restaurants, etc.
+INSERT INTO categories (categorieId, nomCategorie) VALUES
+('HOT001', 'Literie pour hôtel'),
+('HOT002', 'Produits de bain pour hôtel'),
+('RES001', 'Équipements de cuisine'),
+('RES002', 'Denrées alimentaires'),
+('GEN001', 'Électronique générale'),
+('GEN002', 'Mobilier général');
+
+-- Produits pour les hôtels
+INSERT INTO produits (produitId, produitNom, produitsCategorie, prix) VALUES
+('P001', 'Drap de lit 200x200', 'HOT001', 249.99),
+('P002', 'Serviette de bain luxe', 'HOT002', 120.50),
+('P003', 'Shampooing hôtel 500ml', 'HOT002', 50.75);
+
+-- Produits pour les restaurants
+INSERT INTO produits (produitId, produitNom, produitsCategorie, prix) VALUES
+('P004', 'Four professionnel 50L', 'RES001', 8999.99),
+('P005', 'Couteau de chef inox', 'RES001', 399.99),
+('P006', 'Farine bio 1kg', 'RES002', 30.50),
+('P007', 'Huile d’olive extra vierge 500ml', 'RES002', 80.75);
+
+-- Produits généraux
+INSERT INTO produits (produitId, produitNom, produitsCategorie, prix) VALUES
+('P008', 'Télévision LED 32"', 'GEN001', 1500.00),
+('P009', 'Table de bureau en bois', 'GEN002', 1200.00);
