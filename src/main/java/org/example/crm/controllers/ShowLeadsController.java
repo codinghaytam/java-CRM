@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import org.example.crm.dao.impl.AgentCommercialDaoImpl;
+import org.example.crm.dao.impl.LeadDaoImpl;
 import org.example.crm.models.Lead;
 
 import java.net.URL;
@@ -35,7 +36,7 @@ public class ShowLeadsController implements Initializable {
     }
 
     public void loadLeadData() {
-        AgentCommercialDaoImpl dao = new AgentCommercialDaoImpl();
+        LeadDaoImpl dao = new LeadDaoImpl();
         ObservableList<Lead> leadList = FXCollections.observableArrayList(dao.afficheLead());
 
         // Configuration des colonnes
@@ -80,7 +81,7 @@ public class ShowLeadsController implements Initializable {
     }
 
     private void handleDeleteAction(Lead lead) {
-        AgentCommercialDaoImpl dao = new AgentCommercialDaoImpl();
+    	LeadDaoImpl dao = new LeadDaoImpl();
         if (dao.deleteLead(lead.getEntrepriseId())) {
             // Supprimer le lead du tableau
             leadTable.getItems().remove(lead);
