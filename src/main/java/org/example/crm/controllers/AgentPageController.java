@@ -77,6 +77,16 @@ public class AgentPageController  implements Initializable {
         adresse.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getHeadquarters()));
         clientTableView.setItems(Clients);
     }
+    @FXML
+    private void createClient() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/AddClient-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage LeadCreation = new Stage();
+        LeadCreation.setTitle("Create Client");
+        LeadCreation.setScene(scene);
+        LeadCreation.show();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

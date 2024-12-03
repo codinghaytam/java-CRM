@@ -23,7 +23,7 @@
                      <Insets bottom="10.0" top="10.0" />
                   </VBox.margin>
                </Button>
-                <Button fx:id="createLeadBtn" onAction="#createLead" prefWidth="150" text="Add Client">
+                <Button fx:id="createLeadBtn" onAction="#createClient" prefWidth="150" text="Add Client">
                   <VBox.margin>
                      <Insets bottom="10.0" />
                   </VBox.margin>
