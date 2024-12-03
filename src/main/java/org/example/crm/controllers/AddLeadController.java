@@ -35,8 +35,9 @@ public class AddLeadController {
         String headquarters = headquartersField.getText();
         String phone = phoneField.getText();
         String email = emailField.getText();
+        String agent_CNE = CurrentUser.getLoggedInCommercial();
 
-        Lead leads = new Lead(entrepriseId,companyName, headquarters, phone, email); // `entrepriseId` est généré dans la BDD
+        Lead leads = new Lead(entrepriseId,companyName, headquarters, phone, email, agent_CNE); // `entrepriseId` est généré dans la BDD
 
         LeadDaoImpl dao = new LeadDaoImpl();
         if (dao.ajoutLead(leads)) {

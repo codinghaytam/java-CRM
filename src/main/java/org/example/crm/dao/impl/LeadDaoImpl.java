@@ -1,6 +1,7 @@
 package org.example.crm.dao.impl;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +12,13 @@ import java.util.logging.Logger;
 
 import org.example.crm.dao.LeadDao;
 import org.example.crm.models.Lead;
+import org.example.crm.util.CurrentUser;
 import org.example.crm.util.DatabaseConnection;
+
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 public class LeadDaoImpl implements LeadDao {
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static final Logger LOGGER = Logger.getLogger(LeadDaoImpl.class.getName());
     @Override
     public boolean ajoutLead(Lead lead) {
@@ -23,13 +28,15 @@ public class LeadDaoImpl implements LeadDao {
             String headquarters = lead.getHeadquarters();
             String phone = lead.getPhone();
             String email = lead.getEmail();
-            String sql = "INSERT INTO leads(entrepriseId,entrepriseName,headquarters,phone,email) VALUES (?,?,?,?,?)";
+            String agent_CNE = CurrentUser.getLoggedInCommercial();
+            String sql = "INSERT INTO leads(entrepriseId,entrepriseName,headquarters,phone,email,agent_CNE) VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,entrepriseId);
             stmt.setString(2,entrepriseName);
             stmt.setString(3,headquarters);
             stmt.setString(4,phone);
             stmt.setString(5,email);
+            stmt.setString(6,agent_CNE);
             stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace(); // Pour diagnostiquer l'erreur
@@ -49,7 +56,8 @@ public class LeadDaoImpl implements LeadDao {
                                      rs.getString("entrepriseName"),
                                      rs.getString("headquarters"),
                                      rs.getString("phone"),
-                                     rs.getString("email"));
+                                     rs.getString("email"),
+                                     rs.getString("agent_CNE"));
                 					
                 leads.add(lead);
             }
