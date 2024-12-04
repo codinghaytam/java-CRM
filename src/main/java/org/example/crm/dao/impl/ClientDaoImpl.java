@@ -2,6 +2,7 @@ package org.example.crm.dao.impl;
 
 import org.example.crm.dao.ClientDao;
 import org.example.crm.models.Client;
+import org.example.crm.util.CurrentUser;
 import org.example.crm.util.DatabaseConnection;
 
 import java.sql.*;
@@ -15,14 +16,13 @@ public class ClientDaoImpl implements ClientDao {
         Connection conn = null;
         try{
             conn = DatabaseConnection.getConnection();
-            PreparedStatement pr = conn.prepareStatement("insert into client values(?,?,?,?,?,?,?)");
+            PreparedStatement pr = conn.prepareStatement("insert into clients values(?,?,?,?,?,?)");
             pr.setString(1,client.getEntrepriseId());
             pr.setString(2,client.getEntrepriseName());
             pr.setString(3,client.getEmail());
             pr.setString(4,client.getPhone());
             pr.setString(5,client.getHeadquarters());
-            pr.setTimestamp(6, Timestamp.from(Instant.now()));
-            pr.setString(7,null );
+            pr.setString(6, CurrentUser.getLoggedInCommercial());
 
 
             int num = pr.executeUpdate();

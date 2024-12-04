@@ -1,5 +1,6 @@
 package org.example.crm.dao;
 
+import org.example.crm.models.AgentCommercial;
 import org.example.crm.models.Lead;
 import org.example.crm.models.Supervisor;
 
@@ -10,5 +11,5 @@ public interface AgentCommercialDao {
     public List<Lead> afficheLead();
     public boolean deleteLead(String entrepriseId);
     boolean verifyLogin(String login, String password);
-    Supervisor getAgentByCNE(String CNE);
+    AgentCommercial getAgentByCNE(String CNE);
 }

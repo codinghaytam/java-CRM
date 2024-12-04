@@ -2,16 +2,22 @@ package org.example.crm.dao.impl;
 
 import org.example.crm.dao.LeadDao;
 import org.example.crm.models.Lead;
+import org.example.crm.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LeadDaoImpl implements LeadDao {
-    private final Connection connection;
+    private  Connection connection;
 
-    public LeadDaoImpl(Connection connection) {
-        this.connection = connection;
+    public LeadDaoImpl() {
+        try{
+            this.connection = DatabaseConnection.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -18,11 +18,11 @@ public class DemandeDaoImpl implements DemandeDAO {
         PreparedStatement stmt = null;
         try{
             conn = DatabaseConnection.getConnection();
-            stmt = conn.prepareStatement("insert into demande (entrepriseId,CNE,carteDeFideliteId,statut) values(?,?,?,?,?,?)");
-            stmt.setString(2,demande.getClient().getEntrepriseId());
-            stmt.setString(3,agent.getCNE());
-            stmt.setString(4,demande.getClient().getLoyaltyCard().getCarteDeFideliteId());
-            stmt.setString(5,demande.getStatus().toString());
+            stmt = conn.prepareStatement("insert into demandes (entrepriseId,CNE,carteDeFideliteId,statut) values(?,?,?,?)");
+            stmt.setString(1,demande.getClient().getEntrepriseId());
+            stmt.setString(2,agent.getCNE());
+            stmt.setString(3,demande.getClient().getLoyaltyCard().getCarteDeFideliteId());
+            stmt.setString(4,demande.getStatus().toString());
             int isvalid=stmt.executeUpdate();
             if(isvalid==1){
                 return true;

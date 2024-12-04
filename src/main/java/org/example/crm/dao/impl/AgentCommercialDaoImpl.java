@@ -1,6 +1,7 @@
 package org.example.crm.dao.impl;
 
 import org.example.crm.dao.AgentCommercialDao;
+import org.example.crm.models.AgentCommercial;
 import org.example.crm.models.Lead;
 import org.example.crm.models.Supervisor;
 import org.example.crm.util.DatabaseConnection;
@@ -99,18 +100,19 @@ public class AgentCommercialDaoImpl  implements AgentCommercialDao {
         return false;
     }
     @Override
-    public Supervisor getAgentByCNE(String CNE) {
-        final String query = "SELECT CNE, nom, prenom, password FROM supervisor WHERE CNE = ?";
+    public AgentCommercial getAgentByCNE(String CNE) {
+        final String query = "SELECT * FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, CNE);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Supervisor(
+                    return new AgentCommercial(
                             rs.getString("CNE"),
                             rs.getString("nom"),
                             rs.getString("prenom"),
-                            rs.getString("password")
+                            rs.getString("password"),
+                            rs.getString("supervisor_CNE")
                     );
                 }
             }
@@ -123,3 +125,5 @@ public class AgentCommercialDaoImpl  implements AgentCommercialDao {
 
 
 }
+
+

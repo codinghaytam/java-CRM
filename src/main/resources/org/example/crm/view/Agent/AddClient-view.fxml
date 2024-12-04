@@ -17,12 +17,18 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <ComboBox prefWidth="150.0" promptText="Lead">
+            <ComboBox fx:id="leadComboBox" prefWidth="150.0" promptText="Lead">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ComboBox>
-            <Button fx:id="AddClientButton" mnemonicParsing="false" text="submit" />
+            <VBox fx:id="CardInfo" prefHeight="101.0" prefWidth="343.0" />
+            <Button fx:id="AddClientButton" mnemonicParsing="false" onAction="#AddClient" text="submit" />
+            <Label fx:id="errorLabel" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>
