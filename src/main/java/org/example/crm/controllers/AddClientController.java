@@ -61,7 +61,7 @@ public class AddClientController implements Initializable {
             CategorieDaoImpl categorieDao = new CategorieDaoImpl();
             ClientDaoImpl clientDao = new ClientDaoImpl();
             AgentCommercialDaoImpl agentCommercialDao = new AgentCommercialDaoImpl();
-            clientDao.addClient(client);
+            //clientDao.addClient(client);
             loyaltyCardDao.save(card,client.getEntrepriseId());
             demandDao.addDemande(new Demande(client,Status.enAttente), agentCommercialDao.getAgentByCNE(CurrentUser.getLoggedInCommercial()));
             for(String key__ : card.getCategoryDiscount().keySet()){
