@@ -35,7 +35,7 @@ CREATE TABLE clients (
 CREATE TABLE carteDeFidelite (
                         carteDeFideliteId CHAR(36) PRIMARY KEY DEFAULT (UUID()), -- UUID auto-généré
                         clientId CHAR(36) NOT NULL,
-                        statut ENUM('active','suspendue') DEFAULT 'suspendue',
+                        statut ENUM('active','rejette','suspendue') DEFAULT 'suspendue',
                         dateDeCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
                         FOREIGN KEY (clientId) REFERENCES clients(clientId) ON DELETE CASCADE
 );
