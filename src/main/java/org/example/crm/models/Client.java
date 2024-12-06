@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class Client extends Lead {
     LoyaltyCard loyaltyCard;
-    public Client(String entrepriseId, String entrepriseName, String headquarters, String phone, String email) {
-        super(entrepriseId, entrepriseName, headquarters, phone, email);
+    public Client(String entrepriseId, String entrepriseName, String headquarters, String phone, String email, String agent_CNE) {
+        super(entrepriseId, entrepriseName, headquarters, phone, email, agent_CNE);
     }
     public Client(Lead lead, LoyaltyCard loyaltycard) {
     	super(lead);

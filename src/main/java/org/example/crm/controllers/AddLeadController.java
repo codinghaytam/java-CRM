@@ -9,6 +9,7 @@ import org.example.crm.util.CurrentUser;
 import java.util.UUID;
 
 import org.example.crm.dao.impl.AgentCommercialDaoImpl;
+import org.example.crm.dao.impl.LeadDaoImpl;
 
 public class AddLeadController {
 
@@ -34,10 +35,11 @@ public class AddLeadController {
         String headquarters = headquartersField.getText();
         String phone = phoneField.getText();
         String email = emailField.getText();
+        String agent_CNE = CurrentUser.getLoggedInCommercial();
 
-        Lead leads = new Lead(entrepriseId,companyName, headquarters, phone, email); // `entrepriseId` est généré dans la BDD
+        Lead leads = new Lead(entrepriseId,companyName, headquarters, phone, email, agent_CNE); // `entrepriseId` est généré dans la BDD
 
-        AgentCommercialDaoImpl dao = new AgentCommercialDaoImpl();
+        LeadDaoImpl dao = new LeadDaoImpl();
         if (dao.ajoutLead(leads)) {
             System.out.println("Lead added successfully.");
         } else {
