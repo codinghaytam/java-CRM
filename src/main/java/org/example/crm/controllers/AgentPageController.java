@@ -86,6 +86,15 @@ public class AgentPageController  implements Initializable {
         LeadCreation.setScene(scene);
         LeadCreation.show();
     }
+    @FXML
+    private void ajouteCommand() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/Add-command.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage LeadCreation = new Stage();
+        LeadCreation.setTitle("Create Commande");
+        LeadCreation.setScene(scene);
+        LeadCreation.show();
+    }
 
 
     @Override

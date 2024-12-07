@@ -19,7 +19,7 @@ public class ProduitDaoImpl implements ProduitDao {
         List<Produit> produits = new ArrayList<>();
         try{
             connection = DatabaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM produit");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM produits");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 produits.add(new Produit(
@@ -27,8 +27,7 @@ public class ProduitDaoImpl implements ProduitDao {
                         resultSet.getString("produitNom"),
                         resultSet.getString("produitsCategorie"),
                         resultSet.getFloat("prix"),
-                        resultSet.getInt("quantite")
-
+                        0
                 ));
             }
             return produits;

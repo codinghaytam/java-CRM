@@ -27,7 +27,7 @@ public class AgentCommercialDaoImpl  implements AgentCommercialDao {
     }
     @Override
     public AgentCommercial getAgentByCNE(String CNE) {
-        final String query = "SELECT CNE, nom, prenom, password FROM agent_commercial WHERE CNE = ?";
+        final String query = "SELECT * FROM agent_commercial WHERE CNE = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, CNE);
@@ -38,7 +38,7 @@ public class AgentCommercialDaoImpl  implements AgentCommercialDao {
                             rs.getString("nom"),
                             rs.getString("prenom"),
                             rs.getString("password"),
-                            rs.getString("Supervisor_id")
+                            rs.getString("supervisor_CNE")
                     );
                 }
             }

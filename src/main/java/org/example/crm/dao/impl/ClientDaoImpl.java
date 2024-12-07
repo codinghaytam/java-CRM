@@ -54,7 +54,8 @@ public class ClientDaoImpl implements ClientDao {
                         rs.getString("entrepriseName"),
                         rs.getString("headquarters"),
                         rs.getString("phone"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getString("agent_CNE")
                 ));
             }
         }catch(SQLException e){
@@ -72,4 +73,6 @@ public class ClientDaoImpl implements ClientDao {
     public boolean updateClient(Client client) {
         return false;
     }
+
+
 }

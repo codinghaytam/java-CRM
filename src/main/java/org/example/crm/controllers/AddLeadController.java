@@ -3,6 +3,7 @@ package org.example.crm.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.stage.Window;
 import org.example.crm.models.Lead;
 import org.example.crm.util.CurrentUser;
 
@@ -42,6 +43,7 @@ public class AddLeadController {
         LeadDaoImpl dao = new LeadDaoImpl();
         if (dao.ajoutLead(leads)) {
             System.out.println("Lead added successfully.");
+
         } else {
             System.out.println("Failed to add lead.");
         }

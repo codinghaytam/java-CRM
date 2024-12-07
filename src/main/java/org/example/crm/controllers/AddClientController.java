@@ -56,12 +56,12 @@ public class AddClientController implements Initializable {
             }
             System.out.println(values);
             card.setCategoryDiscount(values);
-            Client client = new Client(leadDao.getLeadById(leadComboBox.getValue()),card);
+            Client client = new Client(leadDao.afficheLead().stream().filter(lead -> lead.getEntrepriseId().equals(leadComboBox.getValue())).collect(Collectors.toList()).get(0),card);
             DemandeDaoImpl demandDao = new DemandeDaoImpl();
             CategorieDaoImpl categorieDao = new CategorieDaoImpl();
             ClientDaoImpl clientDao = new ClientDaoImpl();
             AgentCommercialDaoImpl agentCommercialDao = new AgentCommercialDaoImpl();
-            //clientDao.addClient(client);
+            clientDao.addClient(client);
             loyaltyCardDao.save(card,client.getEntrepriseId());
             demandDao.addDemande(new Demande(client,Status.enAttente), agentCommercialDao.getAgentByCNE(CurrentUser.getLoggedInCommercial()));
             for(String key__ : card.getCategoryDiscount().keySet()){
@@ -83,7 +83,7 @@ public class AddClientController implements Initializable {
         LeadDaoImpl leadDao  = new LeadDaoImpl();
         CategorieDaoImpl CategorieDao = new CategorieDaoImpl();
         try {
-            leadComboBox.setItems(FXCollections.observableArrayList(leadDao.getAllLeads().stream().map(Lead::getEntrepriseId).collect(Collectors.toSet())));
+            leadComboBox.setItems(FXCollections.observableArrayList(leadDao.afficheLead().stream().map(Lead::getEntrepriseId).collect(Collectors.toSet())));
             this.categories=CategorieDao.getAllCategories();
             for (int i = 0; i < this.categories.size(); i++) {
                 Label label = new Label(CategorieDao.getAllCategories().get(i).getNom());

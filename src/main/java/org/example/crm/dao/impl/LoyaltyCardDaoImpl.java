@@ -2,6 +2,7 @@ package org.example.crm.dao.impl;
 
 import org.example.crm.dao.LoyaltyCardDao;
 import javafx.util.Pair;
+import org.example.crm.models.Client;
 import org.example.crm.models.LoyaltyCard;
 import org.example.crm.models.Status;
 import org.example.crm.util.DatabaseConnection;
@@ -31,11 +32,11 @@ public class LoyaltyCardDaoImpl implements LoyaltyCardDao{
         if(this.connection.isClosed()){
             this.connection = DatabaseConnection.getConnection();
         }
-        String sql = "INSERT INTO carteDeFidelite (carteDeFideliteId,entrepriseId,statut) VALUES (?,?,?)";
+        String sql = "INSERT INTO cartedefidelite (carteDeFideliteId,entrepriseId,statut) VALUES (?,?,?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, loyaltyCard.getCarteDeFideliteId());
             statement.setString(2, entrepriseId);
-            statement.setString(3,"active");
+            statement.setString(3,"suspendue");
 
             statement.executeUpdate();
         }
@@ -131,5 +132,19 @@ public class LoyaltyCardDaoImpl implements LoyaltyCardDao{
         }
         return discounts;
     }
-
+    public LoyaltyCard findByOwner(String entrepriseId) throws SQLException {
+        if(this.connection.isClosed()){
+            this.connection = DatabaseConnection.getConnection();
+        }
+        String sql = "SELECT carteDeFideliteId FROM carteDeFidelite WHERE entrepriseId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, entrepriseId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new LoyaltyCard(resultSet.getString("carteDeFideliteId"));
+                }
+            }
+        }
+        return null;
+    }
 }
