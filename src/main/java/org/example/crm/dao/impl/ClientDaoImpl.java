@@ -65,8 +65,22 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public boolean deleteClient(int id) {
-        return false;
+    public boolean deleteClient(String id) {
+        try{
+            String sql = "delete from clients where entrepriseId =?";
+            Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            int num = ps.executeUpdate();
+            if(num > 0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

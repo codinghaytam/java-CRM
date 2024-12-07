@@ -27,17 +27,7 @@
                             <Insets bottom="10.0" />
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="showLeadsBtn" onAction="#showLeads" prefWidth="150" style="-fx-background-color: #2a9df4; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5px;" text="Show/Delete Leads">
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Button>
-                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #2a9df4; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5px;" text="Show/Delete Clients">
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Button>
-               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #2a9df4; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5px;" text="creer commande" onAction="#ajouteCommand"/>
+               <Button mnemonicParsing="false" onAction="#ajouteCommand" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #2a9df4; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5px;" text="creer commande" />
                 </children>
             </VBox>
         </left>
