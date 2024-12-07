@@ -10,6 +10,6 @@ import java.util.List;
 public interface ClientDao {
     public boolean addClient(Client client);
     public boolean updateClient(Client client);
-    public boolean deleteClient(int id);
+    public boolean deleteClient(String id);
     public List<Client> selectAll();
 }

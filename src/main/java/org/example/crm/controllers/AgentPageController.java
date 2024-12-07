@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -75,6 +76,35 @@ public class AgentPageController  implements Initializable {
         name.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getEntrepriseName()));
         email.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getEmail()));
         adresse.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getHeadquarters()));
+        // Create the Action column
+        TableColumn<Client, Void> actionColumn = new TableColumn<>("Action");
+
+        // Set the cell factory for the Action column
+        actionColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button("Delete");
+
+            {
+                deleteButton.setOnAction(event -> {
+                    Client client = getTableView().getItems().get(getIndex());
+                    ClientsDao.deleteClient(client.getEntrepriseId()); // Call the delete method in your DAO
+                    Clients.remove(client); // Remove the item from the ObservableList
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                }
+            }
+        });
+
+        // Add the Action column to the TableView
+        clientTableView.getColumns().add(actionColumn);
+
         clientTableView.setItems(Clients);
     }
     @FXML
