@@ -37,7 +37,7 @@ public class LoginController {
 
         if (supervisor.verifyLogin(enteredUsername,enteredPassword)) {
             CurrentUser.setLoggedInAdmin(enteredUsername);
-            MainController.navigateTo("view/Supervisor/adminLandingPage-view.fxml" , "Dashboard" , btn);
+            MainController.navigateTo("view/Supervisor/adminLandingPage-view.fxml" , "Dashboard",false,btn);
         } else {
             messageLabel.setText("Invalid Username or Password");
         }
