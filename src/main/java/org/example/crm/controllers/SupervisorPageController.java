@@ -4,72 +4,100 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import org.example.crm.dao.impl.SupervisorDaoImpl;
+import org.example.crm.util.CurrentUser;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SupervisorPageController {
 
     @FXML
-    private Button manageAgentsBtn;
-
-    @FXML
-    private Button manageLeadsBtn;
-
-    @FXML
-    private Button reportsBtn;
-
-    @FXML
-    private Button settingsBtn;
-
-    @FXML
-    private Button logoutBtn;
+    private Button manageAgentsBtn, manageLeadsBtn, reportsBtn, settingsBtn, logoutBtn ,manageRequestsBtn;;
 
     @FXML
     private LineChart<String, Number> lineChart;
 
+    @FXML
+    private Label totalAgents, nomAdmin ;
+
+
+    private final SupervisorDaoImpl supervisorDao = new SupervisorDaoImpl();
+
+    // Constants for navigation paths and titles
+    private static final String MANAGE_AGENTS_VIEW = "view/Supervisor/ManageAgents-view.fxml";
+    private static final String MANAGE_LEADS_VIEW = "view/Supervisor/ManageLeads-view.fxml";
+    private static final String REPORTS_VIEW = "view/Supervisor/reports-view.fxml";
+    private static final String SETTINGS_VIEW = "view/Supervisor/settings-view.fxml";
+    private static final String LOGIN_VIEW = "view/hello-view.fxml";
+    private static final String REQUESTS_VIEW = "view/Demandes/Requests-view.fxml";
+
     public void initialize() {
-        // Create a series for the chart
+        setupChart();
+        populateStats();
+    }
+
+    private void setupChart() {
+        // Create and populate a series for the chart
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Leads in 2024");
 
-        // Add data to the series
-        series.getData().add(new XYChart.Data<>("January", 50));
-        series.getData().add(new XYChart.Data<>("February", 75));
-        series.getData().add(new XYChart.Data<>("March", 100));
-        series.getData().add(new XYChart.Data<>("April", 150));
-        series.getData().add(new XYChart.Data<>("May", 200));
+        // Define data points using LinkedHashMap to preserve order
+        Map<String, Integer> dataPoints = new LinkedHashMap<>();
+        dataPoints.put("January", 50);
+        dataPoints.put("February", 75);
+        dataPoints.put("March", 100);
+        dataPoints.put("April", 150);
+        dataPoints.put("May", 200);
+
+        // Add data points to the series
+        dataPoints.forEach((month, value) -> series.getData().add(new XYChart.Data<>(month, value)));
 
         // Add the series to the chart
         lineChart.getData().add(series);
     }
 
 
+    private void populateStats() {
+        // Update labels with dynamic data
+        totalAgents.setText(String.valueOf(supervisorDao.showAgents().size()));
+        nomAdmin.setText(CurrentUser.getLoggedInAdmin());
+    }
+
+    // Centralized navigation handler
+    private void navigate(String fxmlPath, String title, boolean newWindow,Button btn) {
+        MainController.navigateTo(fxmlPath, title , newWindow,btn);
+    }
+
     @FXML
     private void HandleManageAgents() {
-        // Handle action for managing agents (Navigate to manage agents page)
-        MainController.navigateTo("view/Supervisor/ManageAgents-view.fxml", "Manage Agents", manageAgentsBtn);
+        navigate(MANAGE_AGENTS_VIEW, "Manage Agents",true,manageAgentsBtn);
+    }
+
+    @FXML
+    private void handleRequests(){
+        navigate(REQUESTS_VIEW,"DEMANDES",true , manageRequestsBtn);
     }
 
     @FXML
     private void HandleManageLeads() {
-        // Handle action for managing leads (Navigate to manage leads page)
-        MainController.navigateTo("view/Supervisor/ManageLeads-view.fxml", "Manage Leads", manageLeadsBtn);
+        navigate(MANAGE_LEADS_VIEW, "Manage Leads",true,manageLeadsBtn);
     }
 
     @FXML
     private void HandleReports() {
-        // Handle action for reports (Navigate to reports page)
-        MainController.navigateTo("view/Supervisor/reports-view.fxml", "Reports", reportsBtn);
+        navigate(REPORTS_VIEW, "Reports",true,reportsBtn);
     }
 
     @FXML
     private void HandleSettings() {
-        // Handle action for settings (Navigate to settings page)
-        MainController.navigateTo("view/Supervisor/settings-view.fxml", "Settings", settingsBtn);
+        navigate(SETTINGS_VIEW, "Settings",true,settingsBtn);
     }
 
     @FXML
     private void HandleLogout() {
-        // Handle logout (Log the user out and navigate to the login page)
-        MainController.navigateTo("view/hello-view.fxml", "Login", logoutBtn);
+        navigate(LOGIN_VIEW, "Login",false,logoutBtn);
     }
 }

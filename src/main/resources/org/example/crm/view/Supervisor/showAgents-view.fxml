@@ -10,12 +10,12 @@
     <!-- TableView for displaying agent details -->
     <TableView fx:id="agentTable" layoutX="10.0" layoutY="50.0" prefHeight="426.0" prefWidth="850.0">
         <columns>
-            <TableColumn fx:id="cneColumn" prefWidth="120.0" text="CNE" />
-            <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
-            <TableColumn fx:id="surnameColumn" prefWidth="150.0" text="Surname" />
-            <TableColumn fx:id="passwordColumn" prefWidth="150.0" text="Password" />
+            <TableColumn fx:id="cneColumn"  text="CNE" />
+            <TableColumn fx:id="nameColumn" text="Name" />
+            <TableColumn fx:id="surnameColumn"  text="Surname" />
+            <TableColumn fx:id="passwordColumn"  text="Password" />
             <!-- Add the Delete column (without the cellFactory logic) -->
-            <TableColumn fx:id="deleteColumn" prefWidth="80.0" text="Action" />
+            <TableColumn fx:id="deleteColumn" text="Action" />
         </columns>
 
         <!-- Set table column resizing policy to make it more responsive -->
