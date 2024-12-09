@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.chart.*?>
 
 <BorderPane fx:id="rootPane" prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.SupervisorPageController">
     <!-- Sidebar -->
@@ -20,7 +20,7 @@
     <!-- Header -->
     <top>
         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #34495e; -fx-padding: 10;">
-            <Label style="-fx-text-fill: white; -fx-font-size: 18px;" text="Welcome, Admin!" />
+            <Label fx:id="nomAdmin" style="-fx-text-fill: white; -fx-font-size: 18px;" />
         </HBox>
     </top>
 
@@ -31,15 +31,16 @@
             <HBox alignment="CENTER" spacing="20">
                 <VBox alignment="CENTER" prefHeight="150" prefWidth="200" style="-fx-background-color: #3498db; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Total Agents" />
-                    <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="25" />
+                    <Label fx:id="totalAgents" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="150" prefWidth="200" style="-fx-background-color: #1abc9c; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Total Leads" />
                     <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="150" />
                 </VBox>
-                <VBox alignment="CENTER" prefHeight="150" prefWidth="200" style="-fx-background-color: #e67e22; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
+                <VBox fx:id="Requests" alignment="CENTER"  prefHeight="150" prefWidth="200" style="-fx-background-color: #e67e22; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Pending Requests" />
                     <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="12" />
+                    <Button fx:id="manageRequestsBtn" onAction="#handleRequests">--></Button>
                 </VBox>
             </HBox>
 
@@ -47,10 +48,10 @@
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Lead Growth Over Time" />
             <LineChart fx:id="lineChart" prefHeight="400" prefWidth="800" style="-fx-background-color: #fff;">
                 <xAxis>
-                    <CategoryAxis label="Month"/>
+                    <CategoryAxis label="Month" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Leads"/>
+                    <NumberAxis label="Leads" />
                 </yAxis>
                 <!-- Empty data, will be populated in controller -->
             </LineChart>
