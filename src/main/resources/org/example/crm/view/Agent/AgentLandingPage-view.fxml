@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane fx:id="rootPane" prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AgentPageController">
+
+    <!-- Top Header (Salesforce-like branding area) -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #4d89ff; -fx-padding: 10;">
+            <ImageView fitHeight="30" fitWidth="120" pickOnBounds="true" preserveRatio="true" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Agent Dashboard" />
+        </HBox>
+    </top>
+
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 20; -fx-pref-width: 220;">
+            <Button fx:id="newLeadsBtn" onAction="#handleNewLeads" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="New Leads" />
+            <Button fx:id="contactedLeadsBtn" onAction="#handleContactedLeads" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Contacted Leads" />
+            <Button fx:id="qualifiedLeadsBtn" onAction="#handleQualifiedLeads" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Qualified Leads" />
+            <Button fx:id="closedLeadsBtn" onAction="#handleClosedLeads" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Closed Leads" />
+            <Button fx:id="reportingBtn" onAction="#handleReports" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Reports" />
+            <Button fx:id="logoutBtn" onAction="#handleLogout" prefWidth="200" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Logout" />
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <!-- Dashboard Overview -->
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER" prefWidth="300" style="-fx-background-color: #3498db; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="New Leads" />
+                    <Label fx:id="newLeadsCount" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" prefWidth="300" style="-fx-background-color: #1abc9c; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Contacted Leads" />
+                    <Label fx:id="contactedLeadsCount" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" prefWidth="300" style="-fx-background-color: #f39c12; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Qualified Leads" />
+                    <Label fx:id="qualifiedLeadsCount" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+            </HBox>
+
+            <!-- Performance Graphs -->
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="TOP_CENTER" prefWidth="580">
+                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Lead Conversion Rate" />
+                    <PieChart fx:id="leadConversionChart" prefWidth="550" prefHeight="300">
+
+                    </PieChart>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefWidth="580">
+                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Lead Progress" />
+                    <BarChart fx:id="leadProgressChart" prefHeight="300" prefWidth="550">
+                        <xAxis>
+                            <CategoryAxis label="Lead Status"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Leads Count"/>
+                        </yAxis>
+
+                    </BarChart>
+                </VBox>
+            </HBox>
+
+            <!-- Activity Feed Section -->
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Activity Feed" />
+            <ListView fx:id="activityFeed" prefHeight="200" prefWidth="1100" style="-fx-background-color: #ecf0f1;">
+                <items>
+
+                </items>
+            </ListView>
+
+            <!-- Quick Actions (Example) -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="quickActionBtn1" onAction="#handleQuickAction1" text="Quick Action 1" style="-fx-background-color: #16a085; -fx-text-fill: white;"/>
+                <Button fx:id="quickActionBtn2" onAction="#handleQuickAction2" text="Quick Action 2" style="-fx-background-color: #16a085; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white;" text="CRM System © 2024" />
+        </HBox>
+    </bottom>
+</BorderPane>
