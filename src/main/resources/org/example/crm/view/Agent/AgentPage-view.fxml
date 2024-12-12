@@ -106,7 +106,7 @@
                             <Insets bottom="10.0" top="10.0" />
                         </VBox.margin>
                     </Label>
-                    <TableView fx:id="leadTable" prefHeight="393.0" prefWidth="751.0" style="-fx-border-color: #c3c3c3; -fx-background-color: #ffffff; -fx-border-radius: 5px;">
+                    <TableView fx:id="clientTableView" prefHeight="393.0" prefWidth="751.0" style="-fx-border-color: #c3c3c3; -fx-background-color: #ffffff; -fx-border-radius: 5px;">
                         <columns>
                             <TableColumn id="id" fx:id="clientid" prefWidth="112.0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="id" />
                             <TableColumn fx:id="name" prefWidth="77.0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="name" />

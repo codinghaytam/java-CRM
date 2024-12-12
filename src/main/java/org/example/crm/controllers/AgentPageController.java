@@ -1,5 +1,10 @@
 package org.example.crm.controllers;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Duration;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +24,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class AgentPageController  implements Initializable {
 
@@ -33,7 +42,7 @@ public class AgentPageController  implements Initializable {
 
 
     @FXML
-    private TableView<Client> clientTableView = new TableView<>();
+    private TableView<Client> clientTableView;
     @FXML
     private TableColumn<Client,String> telephone;
 
@@ -43,6 +52,7 @@ public class AgentPageController  implements Initializable {
     private TableColumn<Client,String> adresse;
     @FXML
     private TableColumn<Client,String> email;
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @FXML
     private TableColumn<Client,String> clientid;
@@ -89,42 +99,38 @@ public class AgentPageController  implements Initializable {
 
     private void displayAll(){
         ClientDaoImpl ClientsDao = new ClientDaoImpl();
-        List<Client> table=ClientsDao.selectAll();
+        List<Client> table = ClientsDao.selectAll();
         ObservableList<Client> Clients = FXCollections.observableArrayList(table);
-        clientid.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getEntrepriseId()));
-        telephone.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getPhone()));
-        name.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getEntrepriseName()));
-        email.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getEmail()));
-        adresse.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getHeadquarters()));
-        // Create the Action column
-        TableColumn<Client, Void> actionColumn = new TableColumn<>("Action");
 
-        // Set the cell factory for the Action column
+        // Set cell value factories
+        clientid.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getEntrepriseId()));
+        telephone.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getPhone()));
+        name.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getEntrepriseName()));
+        email.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getEmail()));
+        adresse.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getHeadquarters()));
+
+        // Add delete button column
+        TableColumn<Client, Void> actionColumn = new TableColumn<>("Action");
         actionColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Delete");
 
             {
                 deleteButton.setOnAction(event -> {
                     Client client = getTableView().getItems().get(getIndex());
-                    ClientsDao.deleteClient(client.getEntrepriseId()); // Call the delete method in your DAO
-                    Clients.remove(client); // Remove the item from the ObservableList
+                    ClientsDao.deleteClient(client.getEntrepriseId());
+                    Clients.remove(client);
                 });
             }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(deleteButton);
-                }
+                setGraphic(empty ? null : deleteButton);
             }
         });
-
-        // Add the Action column to the TableView
         clientTableView.getColumns().add(actionColumn);
 
+        // Set data to the TableView
         clientTableView.setItems(Clients);
     }
     @FXML
@@ -145,12 +151,34 @@ public class AgentPageController  implements Initializable {
         LeadCreation.setScene(scene);
         LeadCreation.show();
     }
+    public static void stopUpdating() {
+        if(scheduler != null)scheduler.shutdown();
+    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        displayAll();
-        showCounts();
+
+
+            scheduler.scheduleAtFixedRate(() -> {
+                // Perform background operations
+                System.out.println("Background update...");
+
+                // Update UI on the JavaFX Application Thread
+                Platform.runLater(() -> {
+
+                    System.out.println("Updating UI on JavaFX thread...");
+                    displayAll();
+                    showCounts();
+                });
+
+            }, 0, 5, TimeUnit.SECONDS); // Initial delay, interval, time unit
+
     }
+
+
+
+
+
 }

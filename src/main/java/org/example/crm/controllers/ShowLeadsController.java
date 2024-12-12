@@ -1,5 +1,6 @@
 package org.example.crm.controllers;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,9 @@ import org.example.crm.models.Lead;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ShowLeadsController implements Initializable {
     @FXML
@@ -44,11 +48,29 @@ public class ShowLeadsController implements Initializable {
     @FXML
     private Button showClientsBtn;
 
+
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadLeadData();
         showCounts();
+        scheduler.scheduleAtFixedRate(() -> {
+            // Perform background operations
+            System.out.println("Background update...");
+
+            // Update UI on the JavaFX Application Thread
+            Platform.runLater(() -> {
+
+                System.out.println("Updating UI on JavaFX thread...");
+
+                loadLeadData();
+                showCounts();
+            });
+
+        }, 0, 5, TimeUnit.SECONDS); // Initial delay, interval, time unit
     }
+
 
     public void loadLeadData() {
         LeadDaoImpl dao = new LeadDaoImpl();
@@ -108,6 +130,9 @@ public class ShowLeadsController implements Initializable {
         }
     }
 
+    public static void stopUpdating() {
+        if(scheduler != null)scheduler.shutdown();
+    }
     @FXML
     private void createClient() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/AddClient-view.fxml"));

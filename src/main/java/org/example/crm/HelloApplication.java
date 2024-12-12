@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.crm.controllers.AgentPageController;
+import org.example.crm.controllers.ShowLeadsController;
 import org.example.crm.dao.impl.AgentCommercialDaoImpl;
 import org.example.crm.dao.impl.ClientDaoImpl;
 import org.example.crm.models.Client;
@@ -28,5 +30,7 @@ public class HelloApplication extends Application {
         AgentCommercialDaoImpl Agentdao = new AgentCommercialDaoImpl();
 
         launch();
+        AgentPageController.stopUpdating();
+        ShowLeadsController.stopUpdating();
     }
 }
