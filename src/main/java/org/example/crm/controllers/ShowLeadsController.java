@@ -1,16 +1,22 @@
 package org.example.crm.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
+import org.example.crm.HelloApplication;
 import org.example.crm.dao.impl.AgentCommercialDaoImpl;
+import org.example.crm.dao.impl.ClientDaoImpl;
 import org.example.crm.dao.impl.LeadDaoImpl;
 import org.example.crm.models.Lead;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,9 +36,18 @@ public class ShowLeadsController implements Initializable {
     @FXML
     private Label messageLabel;
 
+    @FXML
+    private Label clientNumbers;
+    @FXML
+    private Label LeadNumbers;
+
+    @FXML
+    private Button showClientsBtn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadLeadData();
+        showCounts();
     }
 
     public void loadLeadData() {
@@ -86,10 +101,51 @@ public class ShowLeadsController implements Initializable {
             // Supprimer le lead du tableau
             leadTable.getItems().remove(lead);
             System.out.println("Lead " + lead.getEntrepriseId() + " supprimé avec succès.");
-            messageLabel.setText("Lead " + lead.getEntrepriseId() + " supprimé avec succès.");
+            //messageLabel.setText("Lead " + lead.getEntrepriseId() + " supprimé avec succès.");
         } else {
             System.out.println("Erreur lors de la suppression du lead " + lead.getEntrepriseId());
-            messageLabel.setText("Erreur lors de la suppression du lead " + lead.getEntrepriseId());
+            //messageLabel.setText("Erreur lors de la suppression du lead " + lead.getEntrepriseId());
         }
+    }
+
+    @FXML
+    private void createClient() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/AddClient-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage LeadCreation = new Stage();
+        LeadCreation.setTitle("Create Client");
+        LeadCreation.setScene(scene);
+        LeadCreation.show();
+    }
+    @FXML
+    private void ajouteCommand() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/Add-command.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage LeadCreation = new Stage();
+        LeadCreation.setTitle("Create Commande");
+        LeadCreation.setScene(scene);
+        LeadCreation.show();
+    }
+    @FXML
+    private void createLead() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Agent/AddLead-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage LeadCreation = new Stage();
+        LeadCreation.setTitle("Create Lead");
+        LeadCreation.setScene(scene);
+        LeadCreation.show();
+    }
+
+    @FXML
+    private void showClients() {
+        MainController.navigateTo("view/Agent/AgentPage-view.fxml", "Clients", showClientsBtn);
+    }
+
+    @FXML
+    private void showCounts() {
+        ClientDaoImpl clientDao = new ClientDaoImpl();
+        LeadDaoImpl leadDao = new LeadDaoImpl();
+        clientNumbers.setText(clientDao.selectAll().size() + "");
+        LeadNumbers.setText(leadDao.afficheLead().size() + "");
     }
 }

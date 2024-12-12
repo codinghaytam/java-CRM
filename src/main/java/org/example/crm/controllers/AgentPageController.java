@@ -7,14 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.crm.HelloApplication;
 import org.example.crm.dao.impl.ClientDaoImpl;
+import org.example.crm.dao.impl.LeadDaoImpl;
 import org.example.crm.models.Client;
 
 import java.io.IOException;
@@ -49,6 +47,15 @@ public class AgentPageController  implements Initializable {
     @FXML
     private TableColumn<Client,String> clientid;
 
+    @FXML
+    private Label clientNumbers;
+    @FXML
+    private Label LeadNumbers;
+
+    @FXML
+    private Button showClientsBtn;
+
+
     // Méthode pour créer un Lead
     @FXML
     private void createLead() throws IOException {
@@ -63,7 +70,20 @@ public class AgentPageController  implements Initializable {
     // Méthode pour afficher les Leads
     @FXML
     private void showLeads() {
-        MainController.navigateTo("view/Agent/ShowLeads-view.fxml", "Show Leads", showLeadsBtn);
+        MainController.navigateTo("view/Agent/showLeads-view.fxml", "Show Leads", showLeadsBtn);
+    }
+
+    @FXML
+    private void showClients() {
+        MainController.navigateTo("view/Agent/AgentPage-view.fxml", "Clients", showClientsBtn);
+    }
+
+    @FXML
+    private void showCounts() {
+        ClientDaoImpl clientDao = new ClientDaoImpl();
+        LeadDaoImpl leadDao = new LeadDaoImpl();
+        clientNumbers.setText(clientDao.selectAll().size() + "");
+        LeadNumbers.setText(leadDao.afficheLead().size() + "");
     }
 
 
@@ -129,6 +149,8 @@ public class AgentPageController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         displayAll();
+        showCounts();
     }
 }
