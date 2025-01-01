@@ -1,20 +1,23 @@
 package org.example.crm.models;
 
+import java.util.List; 
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
 @Setter
-
-public class Client {
-    private String clientId;
-    private String Name;
-    private String HeadQuarters;
-    private String Phone;
-    private String Email;
-    private String agentId;
+@Getter
+@ToString
+public class Client extends Lead {
+    LoyaltyCard loyaltyCard;
+    public Client(String entrepriseId, String entrepriseName, String headquarters, String phone, String email, String agent_CNE) {
+        super(entrepriseId, entrepriseName, headquarters, phone, email, agent_CNE);
+    }
+    public Client(Lead lead, LoyaltyCard loyaltycard) {
+    	super(lead.getLeadId(), lead.getName(), lead.getHeadQuarters(), lead.getPhone(), lead.getEmail(), lead.getAgentId());
+    	this.loyaltyCard = loyaltycard;
+    }
 }

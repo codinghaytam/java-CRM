@@ -1,16 +1,14 @@
 package org.example.crm.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 
-public class lead {
+public class Lead {
     private String leadId;
     private String Name;
     private String HeadQuarters;

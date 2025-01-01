@@ -27,7 +27,7 @@ public class MainController {
 
     @FXML
     private void handleAgentLogin(ActionEvent event) {
-        navigateTo("view/Supervisor/AgentLogin-view.fxml", "Agent Login",false,agentLoginButton);
+        navigateTo("view/Agent/AgentLogin-view.fxml", "Agent Login",false,agentLoginButton);
     }
 
     Set<String> openedWindows;

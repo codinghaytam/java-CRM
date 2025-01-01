@@ -2,7 +2,7 @@ package org.example.crm.dao.impl;
 
 import org.example.crm.dao.RequestDao;
 import org.example.crm.models.Request;
-import org.example.crm.models.lead;
+import org.example.crm.models.Lead;
 import org.example.crm.models.statut;
 import org.example.crm.util.DatabaseConnection;
 
@@ -66,7 +66,7 @@ public class RequestDaoImpl implements RequestDao {
             String getLeadQuery = "SELECT * FROM leads WHERE leadId = ?";
             String updateLeadQuery = "UPDATE leads SET status = 'CLOSED_WON' WHERE leadId = ?";
 
-            lead current_lead = new lead();
+            Lead current_lead = new Lead();
 
             try (PreparedStatement getLeadStmt = connection.prepareStatement(getLeadQuery);
                  PreparedStatement updateLeadStmt = connection.prepareStatement(updateLeadQuery)) {

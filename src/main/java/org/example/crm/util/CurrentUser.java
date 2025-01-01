@@ -8,4 +8,7 @@ public class CurrentUser {
     @Getter
     private static String loggedInAdmin;
 
+    @Setter
+    @Getter
+    private static String loggedInCommercial;  // Ajout pour AgentCommercial
 }
