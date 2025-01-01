@@ -27,7 +27,6 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class AgentPageController  implements Initializable {
 
@@ -97,7 +96,7 @@ public class AgentPageController  implements Initializable {
     }
 
 
-    private void displayAll(){
+    private void displayAll() {
         ClientDaoImpl ClientsDao = new ClientDaoImpl();
         List<Client> table = ClientsDao.selectAll();
         ObservableList<Client> Clients = FXCollections.observableArrayList(table);
@@ -109,26 +108,29 @@ public class AgentPageController  implements Initializable {
         email.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getEmail()));
         adresse.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getHeadQuarters()));
 
-        // Add delete button column
-        TableColumn<Client, Void> actionColumn = new TableColumn<>("Action");
-        actionColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("Delete");
+        // Check if the action column already exists
+        if (clientTableView.getColumns().stream().noneMatch(col -> col.getText().equals("Action"))) {
+            // Add delete button column
+            TableColumn<Client, Void> actionColumn = new TableColumn<>("Action");
+            actionColumn.setCellFactory(param -> new TableCell<>() {
+                private final Button deleteButton = new Button("Delete");
 
-            {
-                deleteButton.setOnAction(event -> {
-                    Client client = getTableView().getItems().get(getIndex());
-                    ClientsDao.deleteClient(client.getLeadId());
-                    Clients.remove(client);
-                });
-            }
+                {
+                    deleteButton.setOnAction(event -> {
+                        Client client = getTableView().getItems().get(getIndex());
+                        ClientsDao.deleteClient(client.getLeadId());
+                        Clients.remove(client);
+                    });
+                }
 
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : deleteButton);
-            }
-        });
-        clientTableView.getColumns().add(actionColumn);
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setGraphic(empty ? null : deleteButton);
+                }
+            });
+            clientTableView.getColumns().add(actionColumn);
+        }
 
         // Set data to the TableView
         clientTableView.setItems(Clients);

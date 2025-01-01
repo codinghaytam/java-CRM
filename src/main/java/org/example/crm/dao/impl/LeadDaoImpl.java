@@ -29,7 +29,7 @@ public class LeadDaoImpl implements LeadDao {
             String phone = lead.getPhone();
             String email = lead.getEmail();
             String agent_CNE = CurrentUser.getLoggedInCommercial();
-            String sql = "INSERT INTO leads(LeadId,Name,headquarters,phone,email,agentId) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO leads(leadId,Name,headquarters,phone,email,agentId) VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,entrepriseId);
             stmt.setString(2,entrepriseName);
@@ -69,7 +69,7 @@ public class LeadDaoImpl implements LeadDao {
     @Override
     public boolean deleteLead(String entrepriseId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "DELETE FROM leads WHERE entrepriseId = ?";
+            String sql = "DELETE FROM leads WHERE leadId = ?";
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setString(1, entrepriseId);
                 int rowsAffected = stmt.executeUpdate();
