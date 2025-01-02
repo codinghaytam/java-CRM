@@ -30,6 +30,7 @@ public class Request {
         this.description.set(description);
     }
 
+
     // Property access methods for binding (for JavaFX binding purposes)
     public StringProperty idProperty() {
         return id;

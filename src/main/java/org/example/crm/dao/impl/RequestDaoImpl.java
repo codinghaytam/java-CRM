@@ -43,6 +43,45 @@ public class RequestDaoImpl implements RequestDao {
     }
 
     @Override
+    public boolean addRequest(Request request){
+        Connection connection = null;
+        try{
+            connection = DatabaseConnection.getConnection();
+            connection.setAutoCommit(false);
+
+            String insertRequestQuery = "INSERT INTO demandes (lead_id, agent_id, card_id, statut, dateDeCreation, description) VALUES ( ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement insertRequestStmt = connection.prepareStatement(insertRequestQuery)) {
+                insertRequestStmt.setString(1, request.getLeadId());
+                insertRequestStmt.setString(2, request.getAgentId());
+                insertRequestStmt.setString(3, request.getLoyaltyCardId());
+                insertRequestStmt.setString(4, request.getStatus().toString());
+               insertRequestStmt.setDate(5, new java.sql.Date(request.getCreation_date().get().getTime()));
+                insertRequestStmt.setString(6, request.getDescription());
+                insertRequestStmt.executeUpdate();
+            }
+
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            try {
+                // En cas d'erreur, annuler la transaction
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                // Réactiver l'auto-commit
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public boolean acceptRequest(String demandeId, String leadId, String loyaltyCardId) {
         Connection connection = null;
         try{

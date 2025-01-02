@@ -2,8 +2,11 @@ package org.example.crm.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.example.crm.dao.CommandeDao;
 import org.example.crm.models.AgentCommercial;
@@ -11,7 +14,8 @@ import org.example.crm.models.LoyaltyCard;
 import org.example.crm.models.Produit;
 import org.example.crm.util.DatabaseConnection;
 
-public class CommandeDaoImpl implements CommandeDao {		    
+public class CommandeDaoImpl implements CommandeDao {
+		@Override
 		    public boolean ajoutCommande(LoyaltyCard loyaltyCard, AgentCommercial agent, List<Produit> produits) {
 		        Connection connection = null;
 		        try {
@@ -74,4 +78,23 @@ public class CommandeDaoImpl implements CommandeDao {
 		        }
 		}
 
+		@Override
+		public Map<String, Double> getTotalPricePerMonth() {
+			Map<String, Double> totalPricePerMonth = new LinkedHashMap<>();
+			String query = "SELECT DATE_FORMAT(dateDeCreation, '%Y-%m') AS month, SUM(prixTotal) AS total " +
+					"FROM commande GROUP BY month ORDER BY month";
+
+			try (Connection conn = DatabaseConnection.getConnection();
+				 PreparedStatement stmt = conn.prepareStatement(query);
+				 ResultSet rs = stmt.executeQuery()) {
+
+				while (rs.next()) {
+					totalPricePerMonth.put(rs.getString("month"), rs.getDouble("total"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return totalPricePerMonth;
+		}
 }

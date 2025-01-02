@@ -71,10 +71,10 @@ public class AddClientController implements Initializable {
             List<Lead> filteredLeads = leadDao.afficheLead().stream()
                     .filter(lead -> lead.getLeadId().equals(leadComboBox.getValue()))
                     .collect(Collectors.toList());
-            System.out.println("filteredLeads = " + filteredLeads);
-            System.out.println("filteredLeads.getFirst() = " + filteredLeads.getFirst());
+            //System.out.println("filteredLeads = " + filteredLeads);
+            //System.out.println("filteredLeads.getFirst() = " + filteredLeads.getFirst());
             Client client = new Client(filteredLeads.getFirst(), card);
-            System.out.println("client = " + client);
+            //System.out.println("client = " + client);
 
             RequestDaoImpl demandDao = new RequestDaoImpl();
             CategorieDaoImpl categorieDao = new CategorieDaoImpl();
@@ -82,7 +82,7 @@ public class AddClientController implements Initializable {
             AgentCommercialDaoImpl agentCommercialDao = new AgentCommercialDaoImpl();
 
             // Save the client and loyalty card information
-            System.out.println("client.getLeadId() = " + client.getLeadId());
+            //System.out.println("client.getLeadId() = " + client.getLeadId());
             loyaltyCardDao.save(card, client.getLeadId());
             for (String key__ : card.getCategoryDiscount().keySet()) {
                 String CategoryId = categories.stream()
@@ -90,6 +90,18 @@ public class AddClientController implements Initializable {
                         .toList().getFirst().getId();
                 loyaltyCardDao.saveDiscount(card.getCarteDeFideliteId(), CategoryId, card.getCategoryDiscount().get(key__));
             }
+
+            // Add the request
+            Request request = new Request(
+                    UUID.randomUUID().toString(),
+                    client.getLeadId(),
+                    agentCommercialDao.getAgentByCNE(CurrentUser.getLoggedInCommercial()).getCNE(),
+                    card.getCarteDeFideliteId(),
+                    statut.PENDING,
+                    new Date(),
+                    "Creation de client"
+            );
+            demandDao.addRequest(request);
             errorLabel.setText("Demande de creation client est envoyer");
         } else {
             errorLabel.setText("erreur de saisie");

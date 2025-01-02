@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="479.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AgentPageController">
+<AnchorPane prefHeight="479.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.AgentPageController">
     <BorderPane prefHeight="482.0" prefWidth="939.0" style="-fx-background-color: #f4f4f4;">
         <top>
             <Label prefHeight="55.0" prefWidth="941.0" style="-fx-font-size: 24px; -fx-background-color: #34495e; -fx-font-weight: bold; -fx-text-fill: #2a9df4;" text="Agent Home Page" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -59,7 +53,7 @@
                                             <Font size="13.0" />
                                         </font>
                                     </Label>
-                                    <Label text="00" textAlignment="CENTER" textFill="WHITE" fx:id="clientNumbers">
+                                    <Label fx:id="clientNumbers" text="00" textAlignment="CENTER" textFill="WHITE">
                                         <font>
                                             <Font size="36.0" />
                                         </font>
@@ -79,7 +73,7 @@
                                             <Insets />
                                         </VBox.margin>
                                     </Label>
-                                    <Label text="00" textFill="WHITE" fx:id="LeadNumbers">
+                                    <Label fx:id="LeadNumbers" text="00" textFill="WHITE">
                                         <font>
                                             <Font size="36.0" />
                                         </font>
@@ -101,7 +95,7 @@
         <center>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10" BorderPane.alignment="CENTER">
                 <children>
-                    <Label style="-fx-font-size: 24px; -fx-font-family: Arial; -fx-text-fill: #333333;" text="Table of Leads">
+                    <Label style="-fx-font-size: 24px; -fx-font-family: Arial; -fx-text-fill: #333333;" text="Table of Clients">
                         <VBox.margin>
                             <Insets bottom="10.0" top="10.0" />
                         </VBox.margin>

@@ -35,11 +35,11 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="150" prefWidth="200" style="-fx-background-color: #1abc9c; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Total Leads" />
-                    <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="150" />
+                    <Label fx:id="totalLeads" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="150" />
                 </VBox>
                 <VBox fx:id="Requests" alignment="CENTER"  prefHeight="150" prefWidth="200" style="-fx-background-color: #e67e22; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Pending Requests" />
-                    <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="12" />
+                    <Label fx:id="pendingRequests" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="12" />
                     <Button fx:id="manageRequestsBtn" onAction="#handleRequests">--></Button>
                 </VBox>
             </HBox>

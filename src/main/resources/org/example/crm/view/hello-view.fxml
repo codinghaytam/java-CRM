@@ -10,13 +10,26 @@
     </padding>
 
     <!-- Welcome Text -->
-    <Label fx:id="welcomeText" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #3498db; -fx-effect: dropshadow(gaussian, #2980b9, 10, 0.5, 0, 4); -fx-background-color: #ecf0f1; -fx-padding: 20px; -fx-border-radius: 10px;" text="Welcome to the Supercharged CRM System!" />
+    <Label fx:id="welcomeText"
+           text="Welcome to the CRM System!"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;
+                  -fx-padding: 15px; -fx-background-color: #ecf0f1;
+                  -fx-border-radius: 8px; -fx-background-radius: 8px;" />
 
     <!-- Login Buttons -->
     <VBox alignment="CENTER" spacing="20">
-        <Button fx:id="adminLoginButton" onAction="#handleAdminLogin" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 15px 30px; -fx-border-radius: 25px; -fx-effect: dropshadow(gaussian, #c0392b, 10, 0.5, 0, 4);" text="Admin Login" />
+        <Button fx:id="adminLoginButton"
+                text="Admin Login"
+                onAction="#handleAdminLogin"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;
+                       -fx-background-color: #e74c3c; -fx-text-fill: white;
+                       -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
 
-        <Button fx:id="agentLoginButton" onAction="#handleAgentLogin" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 15px 30px; -fx-border-radius: 25px; -fx-effect: dropshadow(gaussian, #2980b9, 10, 0.5, 0, 4);" text="Agent Login" />
+        <Button fx:id="agentLoginButton"
+                text="Agent Login"
+                onAction="#handleAgentLogin"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;
+                       -fx-background-color: #3498db; -fx-text-fill: white;
+                       -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
     </VBox>
-
 </VBox>
