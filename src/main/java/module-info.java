@@ -4,6 +4,8 @@ module org.example.crm {
     requires java.sql;
     requires static lombok;
     requires jbcrypt;
+	requires org.junit.jupiter.api;
+	requires org.mockito;
 
 
     opens org.example.crm to javafx.fxml;
