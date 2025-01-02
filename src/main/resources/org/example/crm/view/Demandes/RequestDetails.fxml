@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER_LEFT" prefHeight="476.0" prefWidth="514.0" spacing="15" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.RequestDetailsController">
+    <!-- Title Label -->
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 10px;" text="Request Details" />
+
+    <!-- Inner VBox for request details -->
+    <VBox spacing="10" style="-fx-padding: 10px;">
+
+        <!-- Request ID -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Request ID:" />
+            <Label fx:id="labelRequestId" style="-fx-font-size: 14px;" />
+        </HBox>
+
+        <!-- Agent ID -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Agent ID:" />
+            <Label fx:id="labelAgentId" style="-fx-font-size: 14px;" />
+        </HBox>
+
+        <!-- Lead ID -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Lead ID:" />
+            <Label fx:id="labelLeadId" style="-fx-font-size: 14px;" />
+        </HBox>
+
+        <!-- Loyalty card ID -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Loyalty Card ID:" />
+            <Label fx:id="labelLoyaltyCardId" style="-fx-font-size: 14px;" />
+        </HBox>
+
+        <!-- Description -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Description:" />
+        </HBox>
+
+        <TextArea fx:id="textAreaDescription" editable="false" prefHeight="186.0" prefWidth="421.0" style="-fx-font-size: 14px; -fx-padding: 10px;" wrapText="true" />
+    </VBox>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 20;">
+      <children>
+         <Button fx:id="acceptBtn" mnemonicParsing="false" onAction="#handleAcceptRequest" text="Accept" />
+         <Button fx:id="rejectBtn" mnemonicParsing="false" text="Reject" onAction="#handleRejectRequest" />
+      </children>
+   </HBox>
+
+   
+
+</VBox>

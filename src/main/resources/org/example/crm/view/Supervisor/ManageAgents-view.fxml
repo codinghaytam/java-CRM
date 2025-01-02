@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.crm.controllers.ManageAgentsController">
+    <!-- Title Section -->
+    <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Manage Agents" />
+    <Label style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;" text="Manage your team and tasks easily" />
+
+    <!-- Button Section -->
+    <VBox alignment="CENTER" maxWidth="300" spacing="15" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10;">
+        <Button fx:id="createAgentBtn" onAction="#createAgent" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10;" text="Create Agent" />
+        <Button fx:id="showAgentsBtn" onAction="#showAgents" prefWidth="200" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10;" text="Show / Delete Agents" />
+    </VBox>
+
+    <!-- Footer Section -->
+    <Label style="-fx-font-size: 12px; -fx-text-fill: #bdc3c7;" text="© 2024 Your CRM System. All rights reserved." />
+</VBox>
